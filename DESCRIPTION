@@ -1,13 +1,16 @@
 Package: birdtrends
-Title: What the Package Does (One Line, Title Case)
+Title: Estimate Trends Based On Modelled Annual Indices Or Related Inputs
 Version: 0.0.0.9000
-Authors@R: 
-    person("Genevieve", "Perkins", , "genevieve.c.perkins@gmail.com", role = c("aut", "cre"),
-           comment = c(ORCID = "0000-0003-2663-5904"))
-Description: What the package does (one paragraph).
+Authors@R: c(person("Genevieve", "Perkins", , "genevieve.c.perkins@gmail.com", role = c("aut", "cre"),
+                comment = c(ORCID = "0000-0003-2663-5904")),
+            person("Adam C.", "Smith", role = "aut",
+                      email = "adam.smith2@canada.ca"))
+Description: This package provides a flexible framework to generate trends (historic or projected), 
+based on actual or modelled annual indices data. This package was designed to undertake assessment of 2016 Partners
+In Flight Landbird Conservation objectives. 
 License: CC BY 4.0
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
-URL: https://github.com/gcperk/birdtrends
-BugReports: https://github.com/gcperk/birdtrends/issues
+URL: https://github.com/ninoxconsulting/birdtrends
+BugReports: https://github.com/ninoxconsulting/birdtrends/issues
