@@ -5,7 +5,7 @@ Authors@R: c(person("Genevieve", "Perkins", , "genevieve.c.perkins@gmail.com", r
                 comment = c(ORCID = "0000-0003-2663-5904")),
              person("Adam C.", "Smith", role = "aut",
                       email = "adam.smith2@canada.ca"))
-Description: NA 
+Description: This package provides a flexible framework to generate trends, based on actual or modeled annual indices data. This package was designed to undertake assessment of 2016 Partners In Flight Landbird Conservation objectives. 
 License: CC BY 4.0
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
