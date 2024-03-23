@@ -1,5 +1,3 @@
-
-
 # birdtrends
 
 This package provides a flexible framework to generate trends (historic or projected),
