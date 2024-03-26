@@ -21,21 +21,41 @@ library(birdtrends)
 We can use the `birdtrends` package to model trends overtime based on annual indices datasets. These include information on year of data, index, and some form of uncertainty. 
 
 
-This vignette assumes you had already followed the steps outlined [here](https://github.com/ninoxconsulting/birdtrends/blob/main/vignettes/Getting_started.Rmd)
+This vignette assumes you had already followed the steps outlined [here](https://ninoxconsulting.github.io/birdtrends/articles/Getting_started.html)
 
 
 ## Modelling trends based on annual indices. 
 
 In many cases, we may not have access to the breadth of information retained in estimating the original modeled annual indices. 
 
-
-
-
-An example dataset is provided within this package. This is an annual estimate on the Pacific Wren (")
+An example dataset is provided within this package. This is an annual estimate on the Pacific Wren (" "), generated using the [bbsBayes2](https://bbsbayes.github.io/bbsBayes2/) package. This data was kindly provided by A.C. Smith. 
 
 ```{r}
 head(annual_indicies_data)
 
 ```
+
+In this example dataset we have an annual index from 1968 to 2022, along with confidence intervals of 2.5% and 97.5%. 
+
+We can fit a hierarchical Bayesian General Additive Model (HGAM) to estimate the overall trend for the species over all years, or a specific date range. 
+
+
+```{r}
+library(mgcv)
+library(dplyr)
+
+
+indat1 <- annual_indicies_data
+
+#fitted_data <- fit_hgam(indat1, start_yr = NA, end_yr = NA, n_knots = 5)
+
+
+
+
+
+```
+
+
+
 
 
