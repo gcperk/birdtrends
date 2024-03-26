@@ -21,12 +21,12 @@ library(birdtrends)
 We can use the `birdtrends` package to model trends overtime based on annual indices datasets. These include information on year of data, index, and some form of uncertainty. 
 
 
-This vignette assumes you had already followed the steps outlined [here]()
+This vignette assumes you had already followed the steps outlined [here](https://github.com/ninoxconsulting/birdtrends/blob/main/vignettes/Getting_started.Rmd)
 
 
 ## Modelling trends based on annual indices. 
 
-In many cases, we may not have access to the bredth of information retained in estimating the original modelled annual indices. 
+In many cases, we may not have access to the breadth of information retained in estimating the original modeled annual indices. 
 
 
 
