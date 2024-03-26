@@ -15,7 +15,8 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
-library(birdtrends)
+#library(birdtrends)
+
 ```
 
 The birdtrends package enables users to estimate trends of populations into the future based on a variety of input data types. 
