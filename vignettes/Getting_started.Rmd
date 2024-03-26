@@ -1,0 +1,46 @@
+---
+title: "Getting_started"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting_started}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(birdtrends)
+```
+
+The birdtrends package enables users to estimate trends of populations into the future based on a variety of input data types. 
+
+# Getting set-up 
+
+1) Download birdtrends
+2) Set up modelling connections. 
+
+
+In order to run all of the model options, you will need to install and set up packages to enable models to be run using [Stan](https://mc-stan.org/). 
+
+You can find a set of excellent installation instructions in the bbsBayes package [here](https://bbsbayes.github.io/bbsBayes2/articles/bbsBayes2.html).
+
+
+# What dataset can be used? 
+
+
+
+# what type of models can we use? 
+
+
+# How to estimate trends 
+
+
+# Output summaries 
+
+

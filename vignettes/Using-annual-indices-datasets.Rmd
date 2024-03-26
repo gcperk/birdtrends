@@ -1,0 +1,41 @@
+---
+title: "Use Annual indices and uncertaintly to estimate trends over time"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Use Annual indices and uncertaintly to estimate trends over time}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(birdtrends)
+```
+
+We can use the `birdtrends` package to model trends overtime based on annual indices datasets. These include information on year of data, index, and some form of uncertainty. 
+
+
+This vignette assumes you had already followed the steps outlined [here]()
+
+
+## Modelling trends based on annual indices. 
+
+In many cases, we may not have access to the bredth of information retained in estimating the original modelled annual indices. 
+
+
+
+
+An example dataset is provided within this package. This is an annual estimate on the Pacific Wren (")
+
+```{r}
+head(annual_indicies_data)
+
+```
+
+
