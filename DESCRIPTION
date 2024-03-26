@@ -12,3 +12,11 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 URL: https://github.com/ninoxconsulting/birdtrends
 BugReports: https://github.com/ninoxconsulting/birdtrends/issues
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Imports: 
+    dplyr,
+    foreach,
+    mgcv,
+    stats
