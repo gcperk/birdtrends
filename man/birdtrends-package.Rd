@@ -12,6 +12,7 @@ This package provides a flexible framework to generate trends, based on actual o
 Useful links:
 \itemize{
   \item \url{https://github.com/ninoxconsulting/birdtrends}
+  \item \url{https://ninoxconsulting.github.io/birdtrends/}
   \item Report bugs at \url{https://github.com/ninoxconsulting/birdtrends/issues}
 }
 
