@@ -75,7 +75,7 @@ fit_hgam <- function(indata, start_yr = NA, end_yr = NA,  n_knots = 5){
 
   ## fit model with cmdstanr
   file <- "inst/models/GAM_smooth_model.stan"
-  mod <- cmdstan_model(file)
+  mod <- cmdstanr::cmdstan_model(file)
 
   fit_gam <- mod$sample(data = stan_data,
                         parallel_chains = 4,
