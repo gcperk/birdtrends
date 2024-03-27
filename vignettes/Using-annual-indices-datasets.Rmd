@@ -14,16 +14,21 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
-#devtools::load_all()
-library(birdtrends)
-
-```
 
 We can use the `birdtrends` package to model trends overtime based on annual indices datasets. These include information on year of data, index, and some form of uncertainty. 
 
+Note: this vignette assumes you had already followed the steps outlined [here](https://ninoxconsulting.github.io/birdtrends/articles/Getting_started.html)
 
-This vignette assumes you had already followed the steps outlined [here](https://ninoxconsulting.github.io/birdtrends/articles/Getting_started.html)
+Lets start by loading all the libraries required.
+
+```{r setup, warning = FALSE, message =FALSE}
+#devtools::load_all()
+library(birdtrends)
+library(mgcv)
+library(dplyr)
+library(tidyr)
+
+```
 
 
 ## Modelling trends based on annual indices. 
@@ -44,10 +49,6 @@ We can fit a hierarchical Bayesian General Additive Model (HGAM) to estimate the
 
 
 ```{r run_hgam, warning = FALSE, message =FALSE}
-#library(mgcv)
-#library(dplyr)
-#library(tidyr)
-
 
 indat1 <- annual_indicies_data
 
@@ -72,12 +73,17 @@ sel_hgams <- fitted_data %>%
 
 ```
 
+We can reformat our original data to use in the plot 
 
 ```{r}
-
 indat1 <- indat1 |> 
   dplyr::mutate(yearn = as.integer(year) - min(as.integer(year)))  
 
+```
+
+Now we can plot the predicted posterior distributions of 100 draws, along with the raw annual indices data provided. 
+
+```{r}
 comp_plot <- ggplot2::ggplot(data = sel_hgams,
                     ggplot2::aes(x = yearn,y = value,
                         group = draw, colour = draw))+
@@ -90,9 +96,11 @@ comp_plot <- ggplot2::ggplot(data = sel_hgams,
   ggplot2::geom_line(alpha = 0.3)+
   ggplot2::scale_colour_viridis_c() +
   ggplot2::scale_y_continuous(trans = "log10")+
-  #facet_wrap(vars(approach))+
   ggplot2::theme_bw()
 
+```
+
+```{r, fig.width=5, fig.height= 5}
 comp_plot
 
 ```
