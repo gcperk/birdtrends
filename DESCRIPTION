@@ -21,6 +21,8 @@ Imports:
     cmdstanr,
     dplyr,
     foreach,
+    ggplot2,
+    magrittr,
     mgcv,
     posterior,
     stats
