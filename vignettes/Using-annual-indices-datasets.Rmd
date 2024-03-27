@@ -23,10 +23,11 @@ Lets start by loading all the libraries required.
 
 ```{r setup, warning = FALSE, message =FALSE}
 #devtools::load_all()
-#library(birdtrends)
-#library(mgcv)
-#library(dplyr)
-#library(tidyr)
+library(birdtrends)
+library(ggplot2)
+library(mgcv)
+library(dplyr)
+library(tidyr)
 
 ```
 
