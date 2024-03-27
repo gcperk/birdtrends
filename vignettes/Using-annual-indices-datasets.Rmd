@@ -1,5 +1,5 @@
 ---
-title: "Use Annual indices and uncertaintly to estimate trends over time"
+title: "Use annual indices and uncertaintly to estimate trends over time"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Use Annual indices and uncertaintly to estimate trends over time}
@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
-
+devtools::load_all()
 library(birdtrends)
 
 ```
@@ -43,7 +43,7 @@ In this example dataset we have an annual index from 1968 to 2022, along with co
 We can fit a hierarchical Bayesian General Additive Model (HGAM) to estimate the overall trend for the species over all years, or a specific date range. 
 
 
-```{r}
+```{r run_hgam, warning = FALSE, message =FALSE}
 #library(mgcv)
 #library(dplyr)
 #library(tidyr)
