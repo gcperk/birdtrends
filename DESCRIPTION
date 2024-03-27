@@ -25,7 +25,8 @@ Imports:
     magrittr,
     mgcv,
     posterior,
-    stats
+    stats,
+    tidyr
 VignetteBuilder: knitr
 Depends: 
     R (>= 2.10)
