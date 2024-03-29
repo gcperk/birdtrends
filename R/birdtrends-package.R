@@ -10,5 +10,7 @@
 #' @importFrom stats lm
 #' @importFrom tibble tibble
 #' @importFrom utils data
+#' @importFrom utils setTxtProgressBar
+#' @importFrom utils txtProgressBar
 ## usethis namespace: end
 NULL
