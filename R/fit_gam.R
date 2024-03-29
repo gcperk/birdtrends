@@ -72,7 +72,6 @@ fit_gam <- function(indata, start_yr = NA, end_yr = NA, n_knots = 5) {
     predvals <- exp(i_dat$gam_pred)
 
     predvals
-
   }
 
   pred_df <- data.frame(preds)

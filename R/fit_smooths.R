@@ -1,4 +1,3 @@
-
 #' Extract Smooths from BBS model run
 #'
 #' @param indata dataframe of generated smooths. Each column is a year, each row is a predicted smooth
