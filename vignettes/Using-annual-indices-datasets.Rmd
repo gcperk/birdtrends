@@ -9,7 +9,7 @@ vignette: >
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  #eval = FALSE,
+  eval = FALSE,
   collapse = TRUE,
   comment = "#>"
 )
@@ -25,7 +25,7 @@ Note: this vignette assumes you had already followed the steps outlined [here](h
 Lets start by loading all the libraries required.
 
 ```{r setup, warning = FALSE, message =FALSE}
-devtools::load_all()
+#devtools::load_all()
 library(birdtrends)
 library(ggplot2)
 library(mgcv)
