@@ -164,7 +164,6 @@ We can now use our modelled annual indices and estimated trends for our given ye
 
 ```{r}
 preds_sm <- predict_trend(ldf, trend_sm, start_yr = 2023, proj_yr = 2050)
-
 ```
 
 
