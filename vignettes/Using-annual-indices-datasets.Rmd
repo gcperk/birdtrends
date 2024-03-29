@@ -58,7 +58,6 @@ We can fit a hierarchical Bayesian General Additive Model (HGAM) to estimate the
 
 indat1 <- annual_indicies_data
 
-# fit the Heirachial GAM model 
 fitted_data <- fit_hgam(indat1, start_yr = NA, end_yr = NA, n_knots = 5)
 
 ```
@@ -158,4 +157,23 @@ trend_sm |>
   distinct()
 
 ```
+
+## 4. Predict trend
+
+We can now use our modelled annual indices and estimated trends for our given years to predict into the future. 
+
+```{r}
+preds_sm <- predict_trend(ldf, trend_sm, start_yr = 2023, proj_yr = 2050)
+
+```
+
+
+```{r}
+head(preds_sm)
+```
+
+
+
+
+
 
