@@ -31,7 +31,7 @@ Plot predicted trends
 }
 \examples{
 \dontrun{
-  hgams_plot <- trend_plot(raw_indices = input_option_1, model_indices = ldf_hgam,
+  hgams_plot <- plot_trend(raw_indices = input_option_1, model_indices = ldf_hgam,
   pred_indices = preds_hgam, start_yr = 2014, end_yr = 2022)
 }
 }
