@@ -6,7 +6,48 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of birdtrends is to …
+The goal of **birdtrends** package is to provide a flexible toolkit to
+estimate population trends (based on annual indices and uncertainty or
+similar data inputs), predict future trends, and compare temporal trends
+over time.
+
+## Data Input Types
+
+This package currently accommodates three types of input data:
+
+1)  Annual indices of relative abundance with CI estimates (i.e. index,
+    upper and lower confidence interval)
+
+2)  Matrix of estimated index based on Bayesian modeled posterior draws
+    (rows) for each year (columns) representing the full annual indices
+    of relative abundance.
+
+3)  Matrix of posterior draws (rows) for each year (columns) based on
+    the smoothed annual indices of relative abundance.
+
+## Estimating annual indices
+
+Depending on the input data type, various methods are available to
+estimate the trend for a given time period. Note in the case of datatype
+3 this already represents a modeled smooth generated from the original
+modeled relative population abundance.
+
+For data input 1: we can fit a hierarchical Bayesian General Additive
+Model (HGAM), using annual indices and uncertainty values.
+
+For data input 2: We can fit a GAM for each posterior draw
+
+For data input 3: This data represents a smoothed output and can be used
+directly for trend assessment.
+
+## Estimate trend between given time points
+
+We can use two time points to estimate a trend. The default method uses
+a geometric mean to estimate the average change in values over the time
+period. Alternatively we can assess the trend based on a linear
+regression between two points.
+
+## Predict trends into the future
 
 ## Installation
 
@@ -26,27 +67,3 @@ This is a basic example which shows you how to solve a common problem:
 #library(birdtrends)
 ## basic example code
 ```
-
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
-
-``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
-```
-
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this.
-
-You can also embed plots, for example:
-
-<img src="man/figures/README-pressure-1.png" width="100%" />
-
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
