@@ -5,7 +5,7 @@
 #' @param start_yr numeric year of the first projected date
 #' @param proj_yr numeric year to which trend will be projected
 #'
-#' @return datatable with modelled and predicted values into the future
+#' @return datatable with modeled and predicted values into the future
 #' @export
 #'
 #' @examples
