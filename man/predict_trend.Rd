@@ -16,7 +16,7 @@ predict_trend(proj_output, trend_output, start_yr = NA, proj_yr = 2046)
 \item{proj_yr}{numeric year to which trend will be projected}
 }
 \value{
-datatable with modelled and predicted values into the future
+datatable with modeled and predicted values into the future
 }
 \description{
 Predict generated trends into the future
