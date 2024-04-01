@@ -1,5 +1,5 @@
 ---
-title: "Use annual indices and uncertaintly to estimate trends over time"
+title: "Use annual indices and uncertainty to estimate trends over time"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Use Annual indices and uncertaintly to estimate trends over time}
@@ -9,7 +9,7 @@ vignette: >
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  eval = FALSE,
+  #eval = FALSE,
   collapse = TRUE,
   comment = "#>"
 )
@@ -25,7 +25,7 @@ Note: this vignette assumes you had already followed the steps outlined [here](h
 Lets start by loading all the libraries required.
 
 ```{r setup, warning = FALSE, message =FALSE}
-#devtools::load_all()
+devtools::load_all()
 library(birdtrends)
 library(ggplot2)
 library(mgcv)
@@ -41,7 +41,7 @@ In many cases, we may not have access to the breadth of information retained in 
 
 An example data set is provided within this package. This is an annual estimate on the Pacific Wren (" "), generated using the [bbsBayes2](https://bbsbayes.github.io/bbsBayes2/) package. This data was kindly provided by A.C. Smith. 
 
-```{r}
+```{r view input dataset}
 
 head(annual_indicies_data)
 
@@ -68,7 +68,7 @@ Select a subset of all the fitted HGAM models and reformat to long format.
 In this example we selected 100 rows for simplicity. 
 
 
-```{r}
+```{r reformat fitted data from hgam}
 sel_hgams <- fitted_data %>%
   dplyr::slice_sample(., n = 100) %>%  
   dplyr::mutate(draw = seq(1, 100, 1)) %>% 
@@ -107,7 +107,6 @@ comp_plot <- ggplot2::ggplot(data = sel_hgams,
 
 ```{r, fig.width=5, fig.height= 5}
 comp_plot
-
 ```
 
 
@@ -160,7 +159,7 @@ trend_sm |>
 
 ## 4. Predict trend
 
-We can now use our modelled annual indices and estimated trends for our given years to predict into the future. 
+We can now use our modeled annual indices and estimated trends for our given years to predict into the future. 
 
 ```{r}
 preds_sm <- predict_trend(ldf, trend_sm, start_yr = 2023, proj_yr = 2050)
@@ -173,6 +172,19 @@ head(preds_sm)
 
 
 
+## 5. Plot the prediction 
 
+Now lets plot the results, to make a "pretty plot" we will use all the steps we worked through above. This includes 1) raw observed indices, 2) modeled indices, 3) predicted indices generated from our trends. 
+
+
+```{r,  fig.width=7, fig.height= 5}
+
+hgams_plot <- plot_trend(raw_indices = indat1, 
+                          model_indices = ldf, 
+                          pred_indices = preds_sm,
+                          start_yr = 2014, 
+                          end_yr = 2022)
+
+```
 
 
