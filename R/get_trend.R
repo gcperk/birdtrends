@@ -51,12 +51,20 @@ get_trend <- function(proj_data, start_yr = NA, end_yr = NA, method = "gmean"){
   if(method == "gmean") {
 
     # estimate the trend based on the years of selection for each draw
-
+    # this relies on trend_dat being sorted by year
+    # is there a risk that it might not be sorted?
     trend_sum <- trend_dat %>%
       dplyr::group_by(draw) %>%
       dplyr::summarise(trend_log = mean(diff(log(proj_y)))) %>%
       dplyr::mutate(perc_trend = 100*(exp(trend_log)-1))
-
+    # this is mathematically equivalent to the end-point trends on the smooth
+    # that are defined in Smith and Edwards 2020 https://doi.org/10.1093/ornithapp/duaa065
+    # e.g.,
+    # trend_sum_alt <- trend_dat %>%
+    #   dplyr::filter(year %in% c(start_yr,end_yr)) %>%
+    #   dplyr::group_by(draw) %>%
+    #   dplyr::summarise(trend_log = (diff(log(proj_y)))/(end_yr-start_yr)) %>%
+    #   dplyr::mutate(perc_trend = 100*(exp(trend_log)-1))
 
   }  else if (method == "lm"){
 
