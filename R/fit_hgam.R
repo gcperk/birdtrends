@@ -15,10 +15,10 @@
 fit_hgam <- function(indata, start_yr = NA, end_yr = NA,  n_knots = 5){
 
   # testing
-  indata = indat1
-  start_yr = NA#1990
-  end_yr = NA#1995
-  n_knots = 5
+  # indata = indat1
+  # start_yr = NA#1990
+  # end_yr = NA#1995
+  # n_knots = 5
 
   allyr_seq <- indata$year
 

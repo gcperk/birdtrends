@@ -47,11 +47,11 @@ head(annual_indicies_data)
 
 ```
 
-In this example data set we have an annual index from 1968 to 2022, along with confidence intervals of 2.5% and 97.5%. 
+In this example data set we have an annual index from 1968 to 2022, along with credible intervals of 2.5% and 97.5%. 
 
 ### 2.1 Fit a Bayesian Heirachial GAM (HGAM)
 
-We can fit a hierarchical Bayesian General Additive Model (HGAM) to estimate the overall trend for the species over all years, or a specific date range. 
+We can fit a hierarchical Bayesian General Additive Model (HGAM) to estimate the overall trend for the species over all years, or a specific date range. This model fits a smooth time-series function (i.e., the GAM) to the log-transformed annual estimates of relative abundance, while accounting for the uncertainty of each annual estimate (i.e., the Hierarchical aspect). This is a measurement-error model that assumes independence in the errors of each annual estimate. This independence assumption will be false for many sets of estimates (e.g., any estimates drawn from any model that includes some explicit temporal structure), but making this independence assumption is reasonable in the absence of a known autocorrelation structure in the annual errors. 
 
 
 ```{r run_hgam, warning = FALSE, message =FALSE}
