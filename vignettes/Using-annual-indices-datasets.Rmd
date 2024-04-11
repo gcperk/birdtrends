@@ -32,6 +32,11 @@ library(mgcv)
 library(dplyr)
 library(tidyr)
 
+install.packages("cmdstanr", repos = c("https://mc-stan.org/r-packages/",
+                                       getOption("repos")))
+
+
+
 ```
 
 

@@ -31,6 +31,10 @@ In order to run all of the model options, you will need to install and set up pa
 
 You can find a set of excellent installation instructions in the bbsBayes package [here](https://bbsbayes.github.io/bbsBayes2/articles/bbsBayes2.html).
 
+```{r}
+install.packages("cmdstanr", repos = c("https://mc-stan.org/r-packages/",
+                                       getOption("repos")))
+```
 
 # What dataset can be used? 
 
