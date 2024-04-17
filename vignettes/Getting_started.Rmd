@@ -14,26 +14,34 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
-#library(birdtrends)
-
-```
-
 The birdtrends package enables users to estimate trends of populations into the future based on a variety of input data types. 
 
 # Getting set-up 
 
-1) Download birdtrends
+1) Install birdtrends
+
+```{r, eval=FALSE}
+remotes::install_github("ninoxconsulting/birdtrends")
+```
 2) Set up modelling connections. 
 
-
-In order to run all of the model options, you will need to install and set up packages to enable models to be run using [Stan](https://mc-stan.org/). 
-
-You can find a set of excellent installation instructions in the bbsBayes package [here](https://bbsbayes.github.io/bbsBayes2/articles/bbsBayes2.html).
+The birdtrends package uses the cmdstanr package to run the hierarchical GAM models using [Stan](https://mc-stan.org/). We can install cmdstanr with:
 
 ```{r}
 install.packages("cmdstanr", repos = c("https://mc-stan.org/r-packages/",
                                        getOption("repos")))
+```
+
+The cmdstanr package in turn requires the `cmdstan` program to run Stan programs. You can use the `cmdstanr` package to `cmdstan`:
+
+```{r}
+cmdstanr::install_cmdstan()
+```
+
+And then check that `cmdstan` was installed properly:
+
+```{r}
+cmdstanr::check_cmdstan_toolchain()
 ```
 
 # What dataset can be used? 
