@@ -14,6 +14,11 @@
 #'}
 fit_hgam <- function(indata, start_yr = NA, end_yr = NA,  n_knots = 5){
 
+  if (!requireNamespace("cmdstanr", quietly = TRUE)) {
+    stop('You need to install the cmdstanr package; install with: 
+  install.packages("cmdstanr", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))')
+  }
+
   # testing
   # indata = indat1
   # start_yr = NA#1990
