@@ -32,7 +32,7 @@ Imports:
     tibble,
     tidyr,
     utils
-Remotes: https://mc-stan.org/r-packages/
+Additional_repositories: https://mc-stan.org/r-packages/
 SystemRequirements: CmdStan (https://mc-stan.org/users/interfaces/cmdstan)
 VignetteBuilder: knitr
 Depends: 
