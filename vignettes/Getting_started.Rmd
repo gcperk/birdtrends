@@ -27,20 +27,20 @@ remotes::install_github("ninoxconsulting/birdtrends")
 
 The birdtrends package uses the cmdstanr package to run the hierarchical GAM models using [Stan](https://mc-stan.org/). We can install cmdstanr with:
 
-```{r}
+```{r, eval=FALSE}
 install.packages("cmdstanr", repos = c("https://mc-stan.org/r-packages/",
                                        getOption("repos")))
 ```
 
 The cmdstanr package in turn requires the `cmdstan` program to run Stan programs. You can use the `cmdstanr` package to `cmdstan`:
 
-```{r}
+```{r, eval=FALSE}
 cmdstanr::install_cmdstan()
 ```
 
 And then check that `cmdstan` was installed properly:
 
-```{r}
+```{r, eval=FALSE}
 cmdstanr::check_cmdstan_toolchain()
 ```
 
