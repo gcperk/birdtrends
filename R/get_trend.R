@@ -18,11 +18,12 @@
 #'}
 get_trend <- function(proj_data, start_yr = NA, end_yr = NA, method = "gmean"){
 
-  #   # testing
-  proj_data <- ldf #_smooths
-  start_yr = 1990
-  end_yr = 2000
-  method = "lm"
+  # testing - start
+  #proj_data <- ldf #_smooths
+  #start_yr = 1990
+  #end_yr = 2000
+  #method = "lm"
+  # testing - end
 
   min_yr <- min(proj_data$year)
   max_yr <- max(proj_data$year)
