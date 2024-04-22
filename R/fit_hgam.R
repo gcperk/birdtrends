@@ -15,36 +15,46 @@
 fit_hgam <- function(indata, start_yr = NA, end_yr = NA,  n_knots = 5){
 
   if (!requireNamespace("cmdstanr", quietly = TRUE)) {
-    stop('You need to install the cmdstanr package; install with: 
+    stop('You need to install the cmdstanr package; install with:
   install.packages("cmdstanr", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))')
   }
 
   # testing
   # indata = indat1
   # start_yr = NA#1990
-  # end_yr = NA#1995
-  # n_knots = 5
+  # end_yr = NA
+  # n_knots = NA
 
-  allyr_seq <- indata$year
+  min_yr <- min(indata$year)
+  max_yr <- max(indata$year)
 
-  # if years are to be filtered do this here:
+
+ # allyr_seq <- indata$year
+
   if(is.na(start_yr)) {
-    start_year <- min(allyr_seq)
+    start_yr <- min_yr
   } else {
-    start_year <- start_yr
+    if(start_yr < min_yr) {
+      message("`start_yr` is before the date range, using minimum year of ",
+              "the data (", start_yr <- min_yr, ") instead.")
+    }
   }
 
-  if(is.na(end_yr)) {
-    end_year <- max(allyr_seq)
+  if (is.na(end_yr)) {
+    end_yr <- max_yr
   } else {
-    end_year <- end_yr
+    if(end_yr > max_yr) {
+    message("`max_year` is beyond the date range, using maximum year of ",
+            "the data (", end_yr <- max_year, ") instead.")
+    }
   }
 
 
   # create a list of year to use
-  year_seq = allyr_seq
-  year_seq = year_seq[year_seq >= start_year]
-  year_seq = year_seq[year_seq <= end_year]
+  year_seq = indata$year
+  year_seq = year_seq[year_seq >= start_yr]
+  year_seq = year_seq[year_seq <= end_yr]
+
 
   # filter years of interest and add sd
   out <- indata |>
@@ -61,6 +71,8 @@ fit_hgam <- function(indata, start_yr = NA, end_yr = NA,  n_knots = 5){
 
   if(is.na(n_knots)){
     n_knots <- as.integer(round(n_indices/4))
+    message("`n_knots` is not defined, using default of one knot per 4 years of data ",
+            "using n_knots = ",  n_knots, ".")
   }
 
   gam_data <- prep_hgam(out$year,
@@ -93,14 +105,13 @@ fit_hgam <- function(indata, start_yr = NA, end_yr = NA,  n_knots = 5){
 
   # check this with Adam:  as it only shows q5 and not : q2_5
 
-
   sum <- fit_gam$summary(variables = NULL,
                          "mean",
                          "sd",
                          "ess_bulk",
-                         "rhat",
-                         q2_5 = q2_5,
-                         q97_5 = q97_5)
+                         "rhat")#,
+                         #q2_5 = q2_5,
+                         #q97_5 = q97_5)
 
   mx_rhat <- max(sum$rhat,na.rm = TRUE)
 
