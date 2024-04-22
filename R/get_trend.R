@@ -19,16 +19,16 @@
 get_trend <- function(proj_data, start_yr = NA, end_yr = NA, method = "gmean"){
 
   #   # testing
-  # proj_data <- ldf_smooths
-  # start_yr = 1990
-  # end_yr = 2000
-  # method = "lm"
+  proj_data <- ldf #_smooths
+  start_yr = 1990
+  end_yr = 2000
+  method = "lm"
 
   min_yr <- min(proj_data$year)
   max_yr <- max(proj_data$year)
 
   if(is.na(start_yr)) {
-    start_yr <-  min_yr
+    start_yr <- min_yr
   } else {
     if(start_yr < min_yr) {
       message("`start_yr` is before the date range, using minimum year of ",
@@ -45,18 +45,19 @@ get_trend <- function(proj_data, start_yr = NA, end_yr = NA, method = "gmean"){
 
 
   # subset data based on the selected years
-  trend_dat <- subset(proj_data, year %in% seq(start_yr, end_yr))
+  trend_dat <- subset(proj_data, year %in% seq(start_yr, end_yr)) %>%
+    arrange(year)
 
 
   if(method == "gmean") {
 
     # estimate the trend based on the years of selection for each draw
-    # this relies on trend_dat being sorted by year
-    # is there a risk that it might not be sorted?
+
     trend_sum <- trend_dat %>%
       dplyr::group_by(draw) %>%
       dplyr::summarise(trend_log = mean(diff(log(proj_y)))) %>%
       dplyr::mutate(perc_trend = 100*(exp(trend_log)-1))
+
     # this is mathematically equivalent to the end-point trends on the smooth
     # that are defined in Smith and Edwards 2020 https://doi.org/10.1093/ornithapp/duaa065
     # e.g.,
