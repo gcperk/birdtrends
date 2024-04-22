@@ -12,39 +12,59 @@
 #' \dontrun{
 #'pred_dataset <- fit_gam(indat2, start_yr = 1990, end_yr = 2020, n_knots = 14)
 #'}
-
 fit_gam <- function(indata, start_yr = NA, end_yr = NA, n_knots = 5) {
 
   # perhaps add a default number of knots or some approximate calculation for number of years?
   # questions 1: - do we want to make the gam option flexible (tp vs cs)
 
   #  # testing lines
-  # indata = indat2
-  # start_yr = NA
-  # end_yr = NA
-  # n_knots = 14
+  #indata = indat2
+  #start_yr = NA
+  #end_yr = NA
+  #n_knots = NA
+  #  # testing end
+
   message("hang tight, you are currently running gams.... this might take a minute")
 
   allyr_seq <- colnames(indata) |>  as.numeric()
 
+  min_yr <- min(allyr_seq)
+  max_yr <- max(allyr_seq)
+
   # if years are to be filtered do this here:
   if(is.na(start_yr)) {
-    start_year <- min(allyr_seq)
+    start_yr <- min_yr
   } else {
-    start_year <- start_yr
+    if(start_yr < min_yr) {
+      message("`start_yr` is before the date range, using minimum year of ",
+              "the data (", start_yr <- min_yr, ") instead.")
+    }
   }
 
-  if(is.na(end_yr)) {
-    end_year <- max(allyr_seq)
+  if (is.na(end_yr)) {
+    end_yr <- max_yr
   } else {
-    end_year <- end_yr
+    if(end_yr > max_yr) {
+      message("`max_year` is beyond the date range, using maximum year of ",
+              "the data (", end_yr <- max_year, ") instead.")
+    }
   }
+
 
   # create a list of year to use
   year_seq = allyr_seq
-  year_seq = year_seq[year_seq >= start_year]
-  year_seq = year_seq[year_seq <= end_year]
+  year_seq = year_seq[year_seq >= start_yr]
+  year_seq = year_seq[year_seq <= end_yr]
 
+
+  #estimate n_knots if not specified
+  n_years <- as.integer(length(year_seq))
+
+  if(is.na(n_knots)){
+    n_knots <- as.integer(round(n_years/4))
+    message("`n_knots` is not defined, using default of one knot per 4 years of data ",
+            "using n_knots = ",  n_knots, ".")
+  }
 
   # filter per years of interest
   indata <- indata |>
@@ -60,8 +80,8 @@ fit_gam <- function(indata, start_yr = NA, end_yr = NA, n_knots = 5) {
 
     i_dat <- data.frame(log_y = as.vector(unlist(out[i])), Year = year_seq)
 
-    gam <- gam(log_y~s(Year, k = n_knots, bs = "tp"),
-               data = i_dat) ## or
+    gam <- mgcv::gam(log_y~s(Year, k = n_knots, bs = "tp"),
+                     data = i_dat) ## or
 
     #gam <- gam(log_y~s(year, bs = 'cs', k = length(knots)),
     #           knots = list(Year = knots),
@@ -81,5 +101,4 @@ fit_gam <- function(indata, start_yr = NA, end_yr = NA, n_knots = 5) {
   return(pred_df)
 
 }
-
 
