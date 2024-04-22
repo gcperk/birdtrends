@@ -2,7 +2,7 @@
 title: "Use annual indices and uncertainty to estimate trends over time"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Use Annual indices and uncertaintly to estimate trends over time}
+  %\VignetteIndexEntry{Use annual indices and uncertainty to estimate trends over time}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -25,20 +25,12 @@ Note: this vignette assumes you had already followed the steps outlined [here](h
 Lets start by loading all the libraries required.
 
 ```{r setup, warning = FALSE, message =FALSE}
-devtools::load_all()
 library(birdtrends)
 library(ggplot2)
 library(mgcv)
 library(dplyr)
 library(tidyr)
-
-install.packages("cmdstanr", repos = c("https://mc-stan.org/r-packages/",
-                                       getOption("repos")))
-
-
-
 ```
-
 
 ## 2. Model the annual indices based on input data of observed annual indices. 
 

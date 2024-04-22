@@ -6,4 +6,4 @@
 .quarto
 inst/doc
 docs
-inst/models
+inst/models/GAM_smooth_model
