@@ -47,7 +47,7 @@ get_trend <- function(proj_data, start_yr = NA, end_yr = NA, method = "gmean"){
 
   # subset data based on the selected years
   trend_dat <- subset(proj_data, year %in% seq(start_yr, end_yr)) %>%
-    arrange(year)
+    dplyr::arrange(year)
 
 
   if(method == "gmean") {
