@@ -55,7 +55,8 @@ We can fit a hierarchical Bayesian General Additive Model (HGAM) to estimate the
 
 indat1 <- annual_indicies_data
 
-fitted_data <- fit_hgam(indat1, start_yr = NA, end_yr = NA, n_knots = 5)
+fitted_data <- fit_hgam(indat1, start_yr = NA, end_yr = NA, n_knots = NA)
+#fitted_data <- fit_hgam(indat1, start_yr = 1990, end_yr = 2014, n_knots = NA)
 
 ```
 
@@ -66,6 +67,7 @@ In this example we selected 100 rows for simplicity.
 
 
 ```{r reformat fitted data from hgam}
+
 sel_hgams <- fitted_data %>%
   dplyr::slice_sample(., n = 100) %>%  
   dplyr::mutate(draw = seq(1, 100, 1)) %>% 
@@ -78,7 +80,12 @@ sel_hgams <- fitted_data %>%
 We can reformat our original data to use in the plot 
 
 ```{r}
+
+min_year <- as.numeric(min(sel_hgams$name))
+max_year <- as.numeric(max(sel_hgams$name))
+
 indat1 <- indat1 |> 
+  filter(year >= min_year & year <= max_year)%>%
   dplyr::mutate(yearn = as.integer(year) - min(as.integer(year)))  
 
 ```
@@ -104,6 +111,7 @@ comp_plot <- ggplot2::ggplot(data = sel_hgams,
 
 ```{r, fig.width=5, fig.height= 5}
 comp_plot
+
 ```
 
 
@@ -115,17 +123,20 @@ First we need to reformat our fitted data. We can modify the object 'sel_hgams' 
 
 We will convert our data to long form, with the following columns "draw", "year", and "proj_y". Note if using the output from the "fit_hgam" we can use the code below. 
 
-```{r}
-  ldf <- tibble::rowid_to_column(fitted_data, "draw") %>%
+```{r estimate trends}
+
+ldf <- tibble::rowid_to_column(fitted_data, "draw") %>%
     tidyr::pivot_longer(., cols = !starts_with("d")) %>%
     dplyr::rename('year' = name, "proj_y" = value)%>%
     mutate(year = as.integer(year))
 
 ```
+
 This creates a dataset in which each row contains an estimated indices per year and per posterior draw (n = 4000). 
 
 ```{r}
- head(ldf)
+head(ldf)
+
 ```
 
 
@@ -134,12 +145,14 @@ Where no dates are specified, the minimum and maximum years will be used. Two me
 
 
 ```{r}
-  trend_sm <- get_trend(ldf, start_yr = 2014, end_yr = 2022, method = "gmean")
+
+trend_sm <- get_trend(ldf, start_yr = 2014, end_yr = 2022, method = "gmean")
 
 ```
 
 ```{r}
- head(trend_sm)
+head(trend_sm)
+
 ```
 
 We can summarise the trend estimates to provide a median and confidence internal
