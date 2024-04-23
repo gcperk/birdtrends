@@ -138,10 +138,10 @@ a known autocorrelation structure in the annual errors.</p>
 <span><span class="va">fitted_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fit_hgam.html">fit_hgam</a></span><span class="op">(</span><span class="va">indat1</span>, start_yr <span class="op">=</span> <span class="cn">NA</span>, end_yr <span class="op">=</span> <span class="cn">NA</span>, n_knots <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Running MCMC with 4 parallel chains...</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Chain 1 finished in 2.0 seconds.</span></span>
-<span><span class="co">#&gt; Chain 4 finished in 2.0 seconds.</span></span>
-<span><span class="co">#&gt; Chain 2 finished in 2.2 seconds.</span></span>
+<span><span class="co">#&gt; Chain 1 finished in 1.9 seconds.</span></span>
 <span><span class="co">#&gt; Chain 3 finished in 2.1 seconds.</span></span>
+<span><span class="co">#&gt; Chain 4 finished in 2.1 seconds.</span></span>
+<span><span class="co">#&gt; Chain 2 finished in 2.2 seconds.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; All 4 chains finished successfully.</span></span>
 <span><span class="co">#&gt; Mean chain execution time: 2.1 seconds.</span></span>
@@ -288,6 +288,36 @@ trends.</p>
 <span>                          start_yr <span class="op">=</span> <span class="fl">2014</span>, </span>
 <span>                          end_yr <span class="op">=</span> <span class="fl">2022</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Using-annual-indices-datasets_files/figure-html/unnamed-chunk-11-1.png" width="672"></p>
+</div>
+<div class="section level2">
+<h2 id="additional-targets-and-trend-estimates">Additional targets and trend estimates<a class="anchor" aria-label="anchor" href="#additional-targets-and-trend-estimates"></a>
+</h2>
+<p>We may also want to track how our predictions are tracking in
+relation to short term trends. For example species identified under the
+partners in flight have short and long term trends.</p>
+<p>For example we may identify a population change from a given time
+step (i.e. 2014) to a short and long term trend as a percentage change
+in population.</p>
+<p>For example we may have a short term target of 2024 with a range of
+-2% to 1% we can calculate what the annual index targets range will be.
+This can be added to our plots to identify the range we need to meet or
+how our predictions are tracking.</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="va">index_baseline</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_targets.html">get_targets</a></span><span class="op">(</span>model_indices <span class="op">=</span> <span class="va">ldf</span>, </span>
+<span>                              ref_year <span class="op">=</span> <span class="fl">2014</span>, </span>
+<span>                              st_year <span class="op">=</span> <span class="fl">2026</span>, </span>
+<span>                              st_lu_target_pc <span class="op">=</span> <span class="op">-</span><span class="fl">2</span>,</span>
+<span>                              st_up_target_pc <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="va">hgams_plot_target</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_trend.html">plot_trend</a></span><span class="op">(</span>raw_indices <span class="op">=</span> <span class="va">indat1</span>, </span>
+<span>                          model_indices <span class="op">=</span> <span class="va">ldf</span>, </span>
+<span>                          pred_indices <span class="op">=</span> <span class="va">preds_sm</span>,</span>
+<span>                          start_yr <span class="op">=</span> <span class="fl">2014</span>, </span>
+<span>                          end_yr <span class="op">=</span> <span class="fl">2022</span>, </span>
+<span>                          targets <span class="op">=</span> <span class="va">index_baseline</span><span class="op">)</span></span></code></pre></div>
+<p><img src="Using-annual-indices-datasets_files/figure-html/unnamed-chunk-13-1.png" width="672"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
