@@ -51,7 +51,7 @@ predict_trend <- function(proj_output,
     # project to 2046
 
     proj_draw <- proj_draw %>%
-      complete(year = seq(start_yr, max(proj_yr), 1)) %>%
+      tidyr::complete(year = seq(start_yr, max(proj_yr), 1)) %>%
       dplyr::mutate(draw = i) %>%
       #filter(year >= proj_start_yr)
       dplyr::mutate(pred_ind = proj_y)%>%
