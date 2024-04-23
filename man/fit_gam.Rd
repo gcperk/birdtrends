@@ -4,7 +4,7 @@
 \alias{fit_gam}
 \title{Fit gam models on posterior draws}
 \usage{
-fit_gam(indata, start_yr = NA, end_yr = NA, n_knots = 5)
+fit_gam(indata, start_yr = NA, end_yr = NA, n_knots = NA)
 }
 \arguments{
 \item{indata}{dataframe of posterior draws. Each column is a year, each row is a posterior draw}
