@@ -138,14 +138,14 @@ a known autocorrelation structure in the annual errors.</p>
 <span><span class="va">fitted_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fit_hgam.html">fit_hgam</a></span><span class="op">(</span><span class="va">indat1</span>, start_yr <span class="op">=</span> <span class="cn">NA</span>, end_yr <span class="op">=</span> <span class="cn">NA</span>, n_knots <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Running MCMC with 4 parallel chains...</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Chain 1 finished in 1.9 seconds.</span></span>
+<span><span class="co">#&gt; Chain 1 finished in 2.0 seconds.</span></span>
 <span><span class="co">#&gt; Chain 3 finished in 2.1 seconds.</span></span>
 <span><span class="co">#&gt; Chain 4 finished in 2.1 seconds.</span></span>
 <span><span class="co">#&gt; Chain 2 finished in 2.2 seconds.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; All 4 chains finished successfully.</span></span>
 <span><span class="co">#&gt; Mean chain execution time: 2.1 seconds.</span></span>
-<span><span class="co">#&gt; Total execution time: 2.4 seconds.</span></span>
+<span><span class="co">#&gt; Total execution time: 2.3 seconds.</span></span>
 <span><span class="co">#fitted_data &lt;- fit_hgam(indat1, start_yr = 1990, end_yr = 2014, n_knots = NA)</span></span></code></pre></div>
 </div>
 <div class="section level4">
@@ -319,6 +319,7 @@ how our predictions are tracking.</p>
 <span>                          pred_indices <span class="op">=</span> <span class="va">preds_sm</span>,</span>
 <span>                          start_yr <span class="op">=</span> <span class="fl">2014</span>, </span>
 <span>                          end_yr <span class="op">=</span> <span class="fl">2022</span>, </span>
+<span>                          ref_yr <span class="op">=</span> <span class="fl">2014</span>,</span>
 <span>                          targets <span class="op">=</span> <span class="va">index_baseline</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Using-annual-indices-datasets_files/figure-html/unnamed-chunk-13-1.png" width="672"></p>
 </div>
@@ -346,23 +347,15 @@ of 2% to increase of 1%) and longterm target (2046) is (increase between
 <span></span>
 <span></span>
 <span><span class="va">prop_st</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 11</span></span></span>
-<span><span class="co">#&gt;   percent_change_ave percent_change_q_0.025 percent_change_q_0.05</span></span>
-<span><span class="co">#&gt;                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>              -<span style="color: #BB0000;">15.8</span>                  -<span style="color: #BB0000;">34.5</span>                 -<span style="color: #BB0000;">31.4</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 8 more variables: percent_change_q_0.25 &lt;dbl&gt;, percent_change_q_0.75 &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   percent_change_q_0.95 &lt;dbl&gt;, percent_change_q_0.975 &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   prob_decrease_2_percent &lt;dbl&gt;, prob_increase_1_percent &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ref_year &lt;dbl&gt;, target_yr &lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 4</span></span></span>
+<span><span class="co">#&gt;   prob_decrease_2_percent prob_increase_1_percent ref_year target_yr</span></span>
+<span><span class="co">#&gt;                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>                    88.9                    7.18     <span style="text-decoration: underline;">2</span>014      <span style="text-decoration: underline;">2</span>026</span></span>
 <span><span class="va">prop_lt</span> </span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 11</span></span></span>
-<span><span class="co">#&gt;   percent_change_ave percent_change_q_0.025 percent_change_q_0.05</span></span>
-<span><span class="co">#&gt;                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>              -<span style="color: #BB0000;">36.8</span>                  -<span style="color: #BB0000;">67.7</span>                 -<span style="color: #BB0000;">63.4</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 8 more variables: percent_change_q_0.25 &lt;dbl&gt;, percent_change_q_0.75 &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   percent_change_q_0.95 &lt;dbl&gt;, percent_change_q_0.975 &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   prob_increase_5_percent &lt;dbl&gt;, prob_increase_10_percent &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ref_year &lt;dbl&gt;, target_yr &lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 4</span></span></span>
+<span><span class="co">#&gt;   prob_increase_5_percent prob_increase_10_percent ref_year target_yr</span></span>
+<span><span class="co">#&gt;                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>                     6.1                     5.03     <span style="text-decoration: underline;">2</span>014      <span style="text-decoration: underline;">2</span>046</span></span>
 <span></span>
 <span></span>
 <span> </span>

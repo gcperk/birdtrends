@@ -57,10 +57,11 @@
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">plot_trend</span><span class="op">(</span></span>
 <span>  raw_indices <span class="op">=</span> <span class="va">indat1</span>,</span>
-<span>  model_indices <span class="op">=</span> <span class="va">ldf_hgam</span>,</span>
-<span>  pred_indices <span class="op">=</span> <span class="va">preds_hgam</span>,</span>
+<span>  model_indices <span class="op">=</span> <span class="va">ldf</span>,</span>
+<span>  pred_indices <span class="op">=</span> <span class="va">preds_sm</span>,</span>
 <span>  start_yr <span class="op">=</span> <span class="fl">2014</span>,</span>
 <span>  end_yr <span class="op">=</span> <span class="fl">2022</span>,</span>
+<span>  ref_yr <span class="op">=</span> <span class="fl">2014</span>,</span>
 <span>  targets <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -84,7 +85,11 @@
 
 
 <dt>end_yr</dt>
-<dd><p>numeric vlaue representing the last year in which trend will be calculated. Default is first available year within the dataset</p></dd>
+<dd><p>numeric value representing the last year in which trend will be calculated. Default is first available year within the dataset</p></dd>
+
+
+<dt>ref_yr</dt>
+<dd><p>numeric value representing the reference year in which trends are compared to, default is 2014 for pif calculations</p></dd>
 
 
 <dt>targets</dt>
