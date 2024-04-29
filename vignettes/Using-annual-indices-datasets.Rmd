@@ -172,6 +172,7 @@ We can now use our modeled annual indices and estimated trends for our given yea
 
 ```{r}
 preds_sm <- predict_trend(ldf, trend_sm, start_yr = 2023, proj_yr = 2050)
+
 ```
 
 
@@ -229,6 +230,7 @@ hgams_plot_target <- plot_trend(raw_indices = indat1,
                           pred_indices = preds_sm,
                           start_yr = 2014, 
                           end_yr = 2022, 
+                          ref_yr = 2014,
                           targets = index_baseline)
 ```
 
