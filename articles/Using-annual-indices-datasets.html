@@ -83,9 +83,9 @@ overtime based on annual indices datasets. These include information on
 year of data, index, and some form of uncertainty.</p>
 <p>Note: this vignette assumes you had already followed the steps
 outlined <a href="https://ninoxconsulting.github.io/birdtrends/articles/Getting_started.html">here</a></p>
-<div class="section level2">
-<h2 id="set-up">1. Set-up<a class="anchor" aria-label="anchor" href="#set-up"></a>
-</h2>
+<div class="section level3">
+<h3 id="set-up">1. Set-up<a class="anchor" aria-label="anchor" href="#set-up"></a>
+</h3>
 <p>Lets start by loading all the libraries required.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ninoxconsulting/birdtrends" class="external-link">birdtrends</a></span><span class="op">)</span></span>
@@ -94,10 +94,10 @@ outlined <a href="https://ninoxconsulting.github.io/birdtrends/articles/Getting_
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="model-the-annual-indices-based-on-input-data-of-observed-annual-indices-">2. Model the annual indices based on input data of observed annual
+<div class="section level3">
+<h3 id="model-the-annual-indices-based-on-input-data-of-observed-annual-indices-">2. Model the annual indices based on input data of observed annual
 indices.<a class="anchor" aria-label="anchor" href="#model-the-annual-indices-based-on-input-data-of-observed-annual-indices-"></a>
-</h2>
+</h3>
 <p>In many cases, we may not have access to the breadth of information
 retained in estimating the original modeled annual indices.</p>
 <p>An example data set is provided within this package. This is an
@@ -117,9 +117,9 @@ data was kindly provided by A.C. Smith.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>  <span style="text-decoration: underline;">1</span>973  3.79          3.04          4.77</span></span></code></pre></div>
 <p>In this example data set we have an annual index from 1968 to 2022,
 along with credible intervals of 2.5% and 97.5%.</p>
-<div class="section level3">
-<h3 id="fit-a-bayesian-heirachial-gam-hgam">2.1 Fit a Bayesian Heirachial GAM (HGAM)<a class="anchor" aria-label="anchor" href="#fit-a-bayesian-heirachial-gam-hgam"></a>
-</h3>
+<div class="section level4">
+<h4 id="fit-a-bayesian-heirachial-gam-hgam">2.1 Fit a Bayesian Heirachial GAM (HGAM)<a class="anchor" aria-label="anchor" href="#fit-a-bayesian-heirachial-gam-hgam"></a>
+</h4>
 <p>We can fit a hierarchical Bayesian General Additive Model (HGAM) to
 estimate the overall trend for the species over all years, or a specific
 date range. This model fits a smooth time-series function (i.e., the
@@ -145,12 +145,12 @@ a known autocorrelation structure in the annual errors.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; All 4 chains finished successfully.</span></span>
 <span><span class="co">#&gt; Mean chain execution time: 2.1 seconds.</span></span>
-<span><span class="co">#&gt; Total execution time: 2.3 seconds.</span></span>
+<span><span class="co">#&gt; Total execution time: 2.4 seconds.</span></span>
 <span><span class="co">#fitted_data &lt;- fit_hgam(indat1, start_yr = 1990, end_yr = 2014, n_knots = NA)</span></span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="explore-the-results">2.2 Explore the results<a class="anchor" aria-label="anchor" href="#explore-the-results"></a>
-</h3>
+<div class="section level4">
+<h4 id="explore-the-results">2.2 Explore the results<a class="anchor" aria-label="anchor" href="#explore-the-results"></a>
+</h4>
 <p>Select a subset of all the fitted HGAM models and reformat to long
 format. In this example we selected 100 rows for simplicity.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -191,9 +191,9 @@ along with the raw annual indices data provided.</p>
 <p><img src="Using-annual-indices-datasets_files/figure-html/unnamed-chunk-4-1.png" width="480"></p>
 </div>
 </div>
-<div class="section level2">
-<h2 id="estimate-trends">3. Estimate trends<a class="anchor" aria-label="anchor" href="#estimate-trends"></a>
-</h2>
+<div class="section level3">
+<h3 id="estimate-trends">3. Estimate trends<a class="anchor" aria-label="anchor" href="#estimate-trends"></a>
+</h3>
 <p>We can use our modeled values to estimate a trend over a given period
 of time. This can be used to predict into the future.</p>
 <p>First we need to reformat our fitted data. We can modify the object
@@ -252,9 +252,9 @@ confidence internal</p>
 <span><span class="co">#&gt;          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>      -<span style="color: #BB0000;">0.035</span><span style="color: #BB0000; text-decoration: underline;">3</span>      -<span style="color: #BB0000;">0.014</span><span style="color: #BB0000; text-decoration: underline;">3</span>      0.006<span style="text-decoration: underline;">46</span></span></span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="predict-trend">4. Predict trend<a class="anchor" aria-label="anchor" href="#predict-trend"></a>
-</h2>
+<div class="section level3">
+<h3 id="predict-trend">4. Predict trend<a class="anchor" aria-label="anchor" href="#predict-trend"></a>
+</h3>
 <p>We can now use our modeled annual indices and estimated trends for
 our given years to predict into the future.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
@@ -273,9 +273,9 @@ our given years to predict into the future.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>     1  <span style="text-decoration: underline;">1</span>972   3.44     3.44</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>     1  <span style="text-decoration: underline;">1</span>973   3.70     3.70</span></span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="plot-the-prediction">5. Plot the prediction<a class="anchor" aria-label="anchor" href="#plot-the-prediction"></a>
-</h2>
+<div class="section level3">
+<h3 id="plot-the-prediction">5. Plot the prediction<a class="anchor" aria-label="anchor" href="#plot-the-prediction"></a>
+</h3>
 <p>Now lets plot the results, to make a “pretty plot” we will use all
 the steps we worked through above. This includes 1) raw observed
 indices, 2) modeled indices, 3) predicted indices generated from our
@@ -289,9 +289,9 @@ trends.</p>
 <span>                          end_yr <span class="op">=</span> <span class="fl">2022</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Using-annual-indices-datasets_files/figure-html/unnamed-chunk-11-1.png" width="672"></p>
 </div>
-<div class="section level2">
-<h2 id="additional-targets-and-trend-estimates">Additional targets and trend estimates<a class="anchor" aria-label="anchor" href="#additional-targets-and-trend-estimates"></a>
-</h2>
+<div class="section level3">
+<h3 id="additional-targets-and-trend-estimates">Additional targets and trend estimates<a class="anchor" aria-label="anchor" href="#additional-targets-and-trend-estimates"></a>
+</h3>
 <p>We may also want to track how our predictions are tracking in
 relation to short term trends. For example species identified under the
 partners in flight have short and long term trends.</p>
@@ -308,7 +308,10 @@ how our predictions are tracking.</p>
 <span>                              ref_year <span class="op">=</span> <span class="fl">2014</span>, </span>
 <span>                              st_year <span class="op">=</span> <span class="fl">2026</span>, </span>
 <span>                              st_lu_target_pc <span class="op">=</span> <span class="op">-</span><span class="fl">2</span>,</span>
-<span>                              st_up_target_pc <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<span>                              st_up_target_pc <span class="op">=</span> <span class="fl">1</span>, </span>
+<span>                              lt_year <span class="op">=</span> <span class="fl">2046</span>, </span>
+<span>                              lt_lu_target_pc <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>                              lt_up_target_pc <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">hgams_plot_target</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_trend.html">plot_trend</a></span><span class="op">(</span>raw_indices <span class="op">=</span> <span class="va">indat1</span>, </span>
@@ -318,6 +321,118 @@ how our predictions are tracking.</p>
 <span>                          end_yr <span class="op">=</span> <span class="fl">2022</span>, </span>
 <span>                          targets <span class="op">=</span> <span class="va">index_baseline</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Using-annual-indices-datasets_files/figure-html/unnamed-chunk-13-1.png" width="672"></p>
+</div>
+<div class="section level2">
+<h2 id="estimate-confidence-of-reaching-targets">Estimate confidence of reaching targets<a class="anchor" aria-label="anchor" href="#estimate-confidence-of-reaching-targets"></a>
+</h2>
+<p>We can use the output of the trends to estimate uncertainty around
+meeting future trends. In the example above we can estimate the
+probability that we will meet our short- term or long-term targets.</p>
+<p>Our theoretical targets for the above example is short term (decrease
+of 2% to increase of 1%) and longterm target (2046) is (increase between
+5 to 10% )</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="va">prop_st</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calculate_probs.html">calculate_probs</a></span><span class="op">(</span>predicted_trends <span class="op">=</span> <span class="va">preds_sm</span>,</span>
+<span>                ref_year <span class="op">=</span> <span class="fl">2014</span>, </span>
+<span>                targ_year <span class="op">=</span> <span class="fl">2026</span>, </span>
+<span>                prob_decrease <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>                prob_increase <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">prop_lt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calculate_probs.html">calculate_probs</a></span><span class="op">(</span>predicted_trends <span class="op">=</span> <span class="va">preds_sm</span>,</span>
+<span>                ref_year <span class="op">=</span> <span class="fl">2014</span>, </span>
+<span>                targ_year <span class="op">=</span> <span class="fl">2046</span>,</span>
+<span>                prob_increase <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">10</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="va">prop_st</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 11</span></span></span>
+<span><span class="co">#&gt;   percent_change_ave percent_change_q_0.025 percent_change_q_0.05</span></span>
+<span><span class="co">#&gt;                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>              -<span style="color: #BB0000;">15.8</span>                  -<span style="color: #BB0000;">34.5</span>                 -<span style="color: #BB0000;">31.4</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 8 more variables: percent_change_q_0.25 &lt;dbl&gt;, percent_change_q_0.75 &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   percent_change_q_0.95 &lt;dbl&gt;, percent_change_q_0.975 &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   prob_decrease_2_percent &lt;dbl&gt;, prob_increase_1_percent &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ref_year &lt;dbl&gt;, target_yr &lt;dbl&gt;</span></span></span>
+<span><span class="va">prop_lt</span> </span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 11</span></span></span>
+<span><span class="co">#&gt;   percent_change_ave percent_change_q_0.025 percent_change_q_0.05</span></span>
+<span><span class="co">#&gt;                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>              -<span style="color: #BB0000;">36.8</span>                  -<span style="color: #BB0000;">67.7</span>                 -<span style="color: #BB0000;">63.4</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 8 more variables: percent_change_q_0.25 &lt;dbl&gt;, percent_change_q_0.75 &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   percent_change_q_0.95 &lt;dbl&gt;, percent_change_q_0.975 &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   prob_increase_5_percent &lt;dbl&gt;, prob_increase_10_percent &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ref_year &lt;dbl&gt;, target_yr &lt;dbl&gt;</span></span></span>
+<span></span>
+<span></span>
+<span> </span>
+<span><span class="co"># predicted_trends = preds_sm</span></span>
+<span><span class="co"># calc_quantiles &lt;- stats::quantile</span></span>
+<span><span class="co"># quantiles = c(0.025, 0.05, 0.25, 0.75, 0.95, 0.975)</span></span>
+<span><span class="co"># prob_decrease = c(0,2,50)</span></span>
+<span><span class="co"># prob_increase = c(0,2,50)</span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># calc_prob_crease &lt;- function(x, p, type = "decrease") {</span></span>
+<span><span class="co">#   if(type == "decrease") f &lt;- function(p) length(x[x &lt; (-1 * p)]) / length(x)</span></span>
+<span><span class="co">#   if(type == "increase") f &lt;- function(p) length(x[x &gt; p]) / length(x)</span></span>
+<span><span class="co">#   </span></span>
+<span><span class="co">#   vapply(p, FUN = f, FUN.VALUE = 1.1) %&gt;%</span></span>
+<span><span class="co">#     stats::setNames(paste0("prob_", type, "_", p, "_percent"))</span></span>
+<span><span class="co"># }</span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># # for each draw subtract target year from ref year (2024) - 2014</span></span>
+<span><span class="co"># aa &lt;- filter(predicted_trends, year %in% c(2014, 2024)) |&gt; </span></span>
+<span><span class="co">#   select(-proj_y)</span></span>
+<span><span class="co">#   </span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># aa &lt;-  pivot_wider(aa, values_from = pred_ind, names_from = year)</span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># ab &lt;- aa |&gt; </span></span>
+<span><span class="co">#   mutate(ch = `2024`/`2014`) |&gt; </span></span>
+<span><span class="co">#   rowwise() |&gt; </span></span>
+<span><span class="co">#   mutate(ch_pc = 100 * (stats::median(ch) -1)) |&gt; </span></span>
+<span><span class="co">#   dplyr::ungroup() %&gt;%</span></span>
+<span><span class="co">#   mutate(percent_change_ave = 100 * (stats::median(ch)-1),</span></span>
+<span><span class="co">#         #percent_change_q_0.025 = 100 *  (stats::quantile(ch, probs = 0.025)-1),</span></span>
+<span><span class="co">#         #percent_change_q_0.05 = 100 *  (stats::quantile(ch, probs = 0.05)-1),</span></span>
+<span><span class="co">#         #percent_change_q_0.25 = 100 *  (stats::quantile(ch, probs = 0.25)-1),</span></span>
+<span><span class="co">#         #percent_change_q_0.75 = 100 *  (stats::quantile(ch, probs = 0.75)-1),</span></span>
+<span><span class="co">#         #percent_change_q_0.95 = 100 *  (stats::quantile(ch, probs = 0.95)-1),</span></span>
+<span><span class="co">#         percent_change_q_0.975 = 100 *  (stats::quantile(ch, probs = 0.975)-1))</span></span>
+<span><span class="co">#  </span></span>
+<span><span class="co">#  </span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># # Model conditional probabilities of population change during trends period</span></span>
+<span><span class="co">#   if(!is.null(prob_decrease)) {</span></span>
+<span><span class="co">#     ab &lt;- ab %&gt;%</span></span>
+<span><span class="co">#       dplyr::mutate(</span></span>
+<span><span class="co">#         pch_pp = purrr::map_df(.data$ch_pc, calc_prob_crease,</span></span>
+<span><span class="co">#                                .env$prob_decrease, type = "decrease")) %&gt;%</span></span>
+<span><span class="co">#       tidyr::unnest("pch_pp") </span></span>
+<span><span class="co">#   }</span></span>
+<span><span class="co">#   </span></span>
+<span><span class="co">#   if(!is.null(prob_increase)){</span></span>
+<span><span class="co">#     ab &lt;- ab %&gt;%</span></span>
+<span><span class="co">#       dplyr::mutate(</span></span>
+<span><span class="co">#         pch_pp = purrr::map_df(.data$ch_pc, calc_prob_crease,</span></span>
+<span><span class="co">#                                .env$prob_increase, type = "increase")) %&gt;%</span></span>
+<span><span class="co">#       tidyr::unnest("pch_pp") </span></span>
+<span><span class="co">#   }</span></span>
+<span><span class="co">#   </span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># # filter and select only sections needed. </span></span>
+<span><span class="co">#  </span></span>
+<span><span class="co">#  out &lt;- ab |&gt; </span></span>
+<span><span class="co">#   mutate(across(starts_with("prob"), ~ sum(.x, na.rm = TRUE)/length(.x)*100)) %&gt;% </span></span>
+<span><span class="co">#   select(starts_with("p"))%&gt;% </span></span>
+<span><span class="co">#    distinct()</span></span>
+<span><span class="co"># </span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
