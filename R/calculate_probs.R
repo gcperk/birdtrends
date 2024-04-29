@@ -50,14 +50,14 @@ calculate_probs <- function(
     dplyr::mutate(ch = targ_year/ref_yr) |>
     dplyr::rowwise() |>
     dplyr::mutate(ch_pc = 100 * (stats::median(ch) -1)) |>
-    dplyr::ungroup() %>%
-    dplyr::mutate(percent_change_ave = 100 * (stats::median(ch)-1),
-           percent_change_q_0.025 = 100 *  (stats::quantile(ch, probs = 0.025)-1),
-           percent_change_q_0.05 = 100 *  (stats::quantile(ch, probs = 0.05)-1),
-           percent_change_q_0.25 = 100 *  (stats::quantile(ch, probs = 0.25)-1),
-           percent_change_q_0.75 = 100 *  (stats::quantile(ch, probs = 0.75)-1),
-           percent_change_q_0.95 = 100 *  (stats::quantile(ch, probs = 0.95)-1),
-           percent_change_q_0.975 = 100 *  (stats::quantile(ch, probs = 0.975)-1))
+    dplyr::ungroup() #%>%
+    # dplyr::mutate(percent_change_ave = 100 * (stats::median(ch)-1),
+    #        percent_change_q_0.025 = 100 *  (stats::quantile(ch, probs = 0.025)-1),
+    #        percent_change_q_0.05 = 100 *  (stats::quantile(ch, probs = 0.05)-1),
+    #        percent_change_q_0.25 = 100 *  (stats::quantile(ch, probs = 0.25)-1),
+    #        percent_change_q_0.75 = 100 *  (stats::quantile(ch, probs = 0.75)-1),
+    #        percent_change_q_0.95 = 100 *  (stats::quantile(ch, probs = 0.95)-1),
+    #        percent_change_q_0.975 = 100 *  (stats::quantile(ch, probs = 0.975)-1))
 
 
 
