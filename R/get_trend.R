@@ -19,7 +19,7 @@
 get_trend <- function(proj_data, start_yr = NA, end_yr = NA, method = "gmean"){
 
   # testing - start
-  #proj_data <- ldf #_smooths
+  #proj_data <- tr
   #start_yr = 1990
   #end_yr = 2000
   #method = "lm"
@@ -37,7 +37,7 @@ get_trend <- function(proj_data, start_yr = NA, end_yr = NA, method = "gmean"){
     }
   }
 
-  if (is.null(end_yr)) {
+  if (is.na(end_yr)) {
     end_yr <- max_yr
   } else if(end_yr > max_yr) {
     message("`max_year` is beyond the date range, using maximum year of ",
