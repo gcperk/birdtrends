@@ -13,3 +13,4 @@ test_that("predict_trend fails appropriately", {
 })
 
 #testthat::test_file("tests/testthat/test-predict_trend.R")
+#devtools::test_coverage()
