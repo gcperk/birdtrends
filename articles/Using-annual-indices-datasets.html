@@ -138,10 +138,10 @@ a known autocorrelation structure in the annual errors.</p>
 <span><span class="va">fitted_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fit_hgam.html">fit_hgam</a></span><span class="op">(</span><span class="va">indat1</span>, start_yr <span class="op">=</span> <span class="cn">NA</span>, end_yr <span class="op">=</span> <span class="cn">NA</span>, n_knots <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Running MCMC with 4 parallel chains...</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Chain 1 finished in 1.9 seconds.</span></span>
-<span><span class="co">#&gt; Chain 4 finished in 2.0 seconds.</span></span>
+<span><span class="co">#&gt; Chain 1 finished in 2.0 seconds.</span></span>
 <span><span class="co">#&gt; Chain 2 finished in 2.2 seconds.</span></span>
 <span><span class="co">#&gt; Chain 3 finished in 2.1 seconds.</span></span>
+<span><span class="co">#&gt; Chain 4 finished in 2.1 seconds.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; All 4 chains finished successfully.</span></span>
 <span><span class="co">#&gt; Mean chain execution time: 2.1 seconds.</span></span>
@@ -206,7 +206,7 @@ of time. This can be used to predict into the future.</p>
 <span><span class="va">ldf</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html" class="external-link">rowid_to_column</a></span><span class="op">(</span><span class="va">fitted_data</span>, <span class="st">"draw"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span><span class="va">.</span>, cols <span class="op">=</span> <span class="op">!</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"d"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span><span class="st">'year'</span> <span class="op">=</span> <span class="va">name</span>, <span class="st">"proj_y"</span> <span class="op">=</span> <span class="va">value</span><span class="op">)</span><span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>This creates a dataset in which each row contains an estimated
 indices per year and per posterior draw (n = 4000).</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
