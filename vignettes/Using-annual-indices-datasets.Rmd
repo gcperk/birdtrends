@@ -127,7 +127,7 @@ We will convert our data to long form, with the following columns "draw", "year"
 ldf <- tibble::rowid_to_column(fitted_data, "draw") %>%
     tidyr::pivot_longer(., cols = !starts_with("d")) %>%
     dplyr::rename('year' = name, "proj_y" = value)%>%
-    mutate(year = as.integer(year))
+    dplyr::mutate(year = as.integer(year))
 
 ```
 
