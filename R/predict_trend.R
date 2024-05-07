@@ -23,9 +23,22 @@ predict_trend <- function(proj_output,
   # start_yr = 2023
   # proj_yr = 2046
 
+  #proj_output = ldf
+  #trend_output  = trend_sm
+  #proj_output  = indata1
+  #trend_output = tr
+
+  if(is.na(start_yr)){
+    start_yr <- max_yr <- max(proj_output$year)+ 1
+  }
+
+  if(start_yr - (max(proj_output$year)) > 1){
+    stop("Start year of prediction is too far in advance, choose a year no more than 1 year more than maximum year of data")
+  }
+
 
   # generate a table for inputs
-  pred_out <- proj_output[1,]%>% dplyr::mutate(pred_ind = 0)
+  pred_out <- proj_output[1,] %>% dplyr::mutate(pred_ind = 0)
 
   pbar <- txtProgressBar()
   message("hold tight, running the numbers!")
@@ -35,7 +48,7 @@ predict_trend <- function(proj_output,
   for( i in trend_output$draw){
 
     # testing line
-    #i  = trend_output$draw[2]
+    # i  = trend_output$draw[2]
     # end testing line
 
     setTxtProgressBar(pbar, i/length(trend_output$draw))
@@ -63,7 +76,7 @@ predict_trend <- function(proj_output,
       proj_draw$pred_ind[proj_draw$year == y] <- proj_draw$pred_ind[proj_draw$year == (y-1)] *exp(trend_draw)
     }
 
-    pred_out <- bind_rows(pred_out, proj_draw)
+    pred_out <- dplyr::bind_rows(pred_out, proj_draw)
 
   }
 
