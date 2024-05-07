@@ -26,14 +26,32 @@ plot_trend <- function(raw_indices = indat1,
 
 #
 # #   ## start testing
-#   raw_indices = indat1
-#   model_indices = ldf
-#   pred_indices = preds_sm
-#   start_yr = 2014
-#   end_yr = 2022
-#   ref_yr = 2014
-#   targets = index_baseline
-  ## end testing
+  #  raw_indices = indat1
+  #  model_indices = ldf
+  #  pred_indices = pred_sm
+  #  start_yr = 1980
+  #  end_yr = 2000
+  #  ref_yr = 1970
+  #  targets = NULL
+  #  #targets = index_baseline
+  # ## end testing
+
+   if(any(is.na(c(start_yr, end_yr, ref_yr)))){
+     stop("Opps - you are missing year values - please ensure start, end and ref year are defined")
+   }
+
+   min_yr <- min(model_indices$year)
+   max_yr <- max(pred_indices$year)
+
+   if(start_yr < min_yr) {
+       message("`start_yr` is before the date range, using minimum year of ",
+               "the data (", start_yr <- min_yr, ") instead.")
+     }
+
+   if(end_yr > max_yr) {
+     message("`end_year` is beyond the date range, using maximum year of ",
+             "the data (", end_yr <- max_yr, ") instead.")
+   }
 
 
   gam_summarized <- model_indices %>%
