@@ -17,6 +17,7 @@ test_that("plot trendfails appropriately", {
   expect_message(plot_trend(indat1, ldf, pred_sm, start_yr = 1900, end_yr = 1977, ref_yr = 1977))
   expect_message(plot_trend(indat1, ldf, pred_sm, start_yr = 1978, end_yr = 2020, ref_yr = 1977))
   expect_error(plot_trend("a",ldf, pred_sm, start_yr = 1900, end_yr = 1977, ref_yr = 1977))
+  #expect_error(plot_trend(indat1,ldf, pred_sm, start_yr = NA, end_yr = 1977, ref_yr = 1977))
 })
 
 #testthat::test_file("tests/testthat/test-plot_trend.R")

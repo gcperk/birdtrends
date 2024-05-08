@@ -1,4 +1,3 @@
-
 test_that("predict_trend results correct", {
   indata1 <- readRDS(test_path("testdata", "fit_hgam_model.rds"))
   tr = get_trend(readRDS(test_path("testdata", "fit_hgam_model.rds")))
