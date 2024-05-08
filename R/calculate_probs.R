@@ -24,6 +24,33 @@ calculate_probs <- function(
     prob_increase = NULL){
 
 
+  # check in input values
+  uyrs <-  predicted_trends$year
+  if(!ref_year %in% uyrs){
+    stop("reference year is not within input data, please re-select")
+  }
+  if(!targ_year %in% uyrs){
+    stop("target year is not within input data, please re-select")
+  }
+
+  if(!targ_year %in% uyrs){
+    stop("target year is not within input data, please re-select")
+  }
+  if(!is.null(prob_decrease)){
+    if(!is.numeric(prob_decrease)){
+    stop("prob_decrease must be numeric")
+      }
+  }
+  if(!is.null(prob_increase)){
+    if(!is.numeric(prob_increase)){
+    stop("prob_increase must be numeric")
+    }
+  }
+  if(is.null(prob_increase) & is.null(prob_decrease)){
+    stop("no target increase or decrease included")
+  }
+
+
   # set up parts of function
   #calc_quantiles = stats::quantile
   #quantiles = c(0.025, 0.05, 0.25, 0.75, 0.95, 0.975)

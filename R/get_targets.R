@@ -39,6 +39,21 @@ get_targets <- function(model_indices = ldf,
   # lt_up_target_pc = NA
   # # end testing/
 
+
+  # check in input values
+  uyrs <-  model_indices$year
+  if(!ref_year %in% uyrs){
+    stop("reference year is not within input data, please re-select")
+  }
+  if(!st_year %in% uyrs){
+    stop("st year is not within input data, please re-select")
+  }
+
+   if(st_lu_target_pc > st_up_target_pc){
+     stop("st_lower confidence is higher than upper confifence value")
+   }
+
+
   # get the reference year for change
   index_baseline <- model_indices %>%
     dplyr::filter(year == ref_year)%>%

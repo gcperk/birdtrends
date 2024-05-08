@@ -19,9 +19,9 @@
 get_trend <- function(proj_data, start_yr = NA, end_yr = NA, method = "gmean"){
 
   # testing - start
-  #proj_data <- tr
-  #start_yr = 1990
-  #end_yr = 2000
+  #proj_data <- tr_dat
+  #start_yr = 1970
+  #end_yr = 1976
   #method = "lm"
   # testing - end
 
@@ -41,7 +41,7 @@ get_trend <- function(proj_data, start_yr = NA, end_yr = NA, method = "gmean"){
     end_yr <- max_yr
   } else if(end_yr > max_yr) {
     message("`max_year` is beyond the date range, using maximum year of ",
-            "the data (", end_yr <- max_year, ") instead.")
+            "the data (", end_yr <- max_yr, ") instead.")
   }
 
 
@@ -80,10 +80,10 @@ get_trend <- function(proj_data, start_yr = NA, end_yr = NA, method = "gmean"){
     trend_lms <- trend_df %>% dplyr::mutate(model = purrr::map(data, lm_mod))
 
     trend_sum <- trend_lms %>%
-      dplyr::mutate(tidy = purrr::map(model, broom::tidy),
-             trend_log = broom::tidy %>% purrr::map_dbl(function(x) x$estimate[2])) %>%
+      dplyr::mutate(tidy = purrr::map(model, broom::tidy)) %>%
+      dplyr::mutate(trend_log = purrr::map(tidy, ~.x$estimate[2])) %>%
       dplyr::select(c(-model, -tidy, -data)) %>%
-      tidyr::unnest(cols = c(draw))%>%
+      tidyr::unnest(cols = c(trend_log))%>%
       dplyr::mutate(perc_trend = 100*(exp(trend_log)-1))
 
   }
