@@ -208,7 +208,6 @@ For example we may have a short term target of 2024 with a range of -2% to 1% we
 
 
 ```{r}
-
 index_baseline <- get_targets(model_indices = ldf, 
                               ref_year = 2014, 
                               st_year = 2026, 
