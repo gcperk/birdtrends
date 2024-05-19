@@ -14,8 +14,7 @@
 #'}
 fit_gam <- function(indata, start_yr = NA, end_yr = NA, n_knots = NA) {
 
-  # perhaps add a default number of knots or some approximate calculation for number of years?
-  # questions 1: - do we want to make the gam option flexible (tp vs cs)
+   # questions 1: - do we want to make the gam option flexible (tp vs cs)
 
   #  # testing lines
   #indata = indat2
