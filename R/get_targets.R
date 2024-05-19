@@ -45,9 +45,6 @@ get_targets <- function(model_indices = ldf,
   if(!ref_year %in% uyrs){
     stop("reference year is not within input data, please re-select")
   }
-  if(!st_year %in% uyrs){
-    stop("st year is not within input data, please re-select")
-  }
 
    if(st_lu_target_pc > st_up_target_pc){
      stop("st_lower confidence is higher than upper confifence value")
