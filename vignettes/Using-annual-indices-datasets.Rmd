@@ -36,7 +36,7 @@ library(tidyr)
 
 In many cases, we may not have access to the breadth of information retained in estimating the original modeled annual indices. 
 
-An example data set is provided within this package. This is an annual estimate on the Pacific Wren (" "), generated using the [bbsBayes2](https://bbsbayes.github.io/bbsBayes2/) package. This data was kindly provided by A.C. Smith. 
+An example data set is provided within this package. This is an annual estimate on the Pacific Wren ("Troglodytes pacificus"), generated using the [bbsBayes2](https://bbsbayes.github.io/bbsBayes2/) package. This data was kindly provided by A.C. Smith. 
 
 ```{r view input dataset}
 
@@ -222,7 +222,7 @@ index_baseline <- get_targets(model_indices = ldf,
 
 
 
-```{r,,  fig.width=7, fig.height= 5}
+```{r, fig.width=7, fig.height= 5}
 
 hgams_plot_target <- plot_trend(raw_indices = indat1, 
                           model_indices = ldf, 
@@ -241,92 +241,22 @@ We can use the output of the trends to estimate uncertainty around meeting futur
 Our theoretical targets for the above example is short term (decrease of 2% to increase of 1%) and longterm target (2046) is (increase between 5 to 10% )
 
 
-```{r}
-
-prop_st <- calculate_probs(predicted_trends = preds_sm,
-                ref_year = 2014, 
-                targ_year = 2026, 
-                prob_decrease = 2,
-                prob_increase = 1)
-
-prop_lt <- calculate_probs(predicted_trends = preds_sm,
-                ref_year = 2014, 
-                targ_year = 2046,
-                prob_increase = c(5,10))
-
-
-prop_st
-prop_lt 
-
-
- 
-# predicted_trends = preds_sm
-# calc_quantiles <- stats::quantile
-# quantiles = c(0.025, 0.05, 0.25, 0.75, 0.95, 0.975)
-# prob_decrease = c(0,2,50)
-# prob_increase = c(0,2,50)
+```{r, eval = FALSE}
+# 
+# prop_st <- calculate_probs(predicted_trends = preds_sm,
+#                 ref_year = 2014, 
+#                 targ_year = 2026, 
+#                 prob_decrease = 2,
+#                 prob_increase = 1)
+# 
+# prop_lt <- calculate_probs(predicted_trends = preds_sm,
+#                 ref_year = 2014, 
+#                 targ_year = 2046,
+#                 prob_increase = c(5,10))
 # 
 # 
-# 
-# 
-# calc_prob_crease <- function(x, p, type = "decrease") {
-#   if(type == "decrease") f <- function(p) length(x[x < (-1 * p)]) / length(x)
-#   if(type == "increase") f <- function(p) length(x[x > p]) / length(x)
-#   
-#   vapply(p, FUN = f, FUN.VALUE = 1.1) %>%
-#     stats::setNames(paste0("prob_", type, "_", p, "_percent"))
-# }
-# 
-# 
-# 
-# 
-# # for each draw subtract target year from ref year (2024) - 2014
-# aa <- filter(predicted_trends, year %in% c(2014, 2024)) |> 
-#   select(-proj_y)
-#   
-# 
-# aa <-  pivot_wider(aa, values_from = pred_ind, names_from = year)
-# 
-# ab <- aa |> 
-#   mutate(ch = `2024`/`2014`) |> 
-#   rowwise() |> 
-#   mutate(ch_pc = 100 * (stats::median(ch) -1)) |> 
-#   dplyr::ungroup() %>%
-#   mutate(percent_change_ave = 100 * (stats::median(ch)-1),
-#         #percent_change_q_0.025 = 100 *  (stats::quantile(ch, probs = 0.025)-1),
-#         #percent_change_q_0.05 = 100 *  (stats::quantile(ch, probs = 0.05)-1),
-#         #percent_change_q_0.25 = 100 *  (stats::quantile(ch, probs = 0.25)-1),
-#         #percent_change_q_0.75 = 100 *  (stats::quantile(ch, probs = 0.75)-1),
-#         #percent_change_q_0.95 = 100 *  (stats::quantile(ch, probs = 0.95)-1),
-#         percent_change_q_0.975 = 100 *  (stats::quantile(ch, probs = 0.975)-1))
-#  
-#  
-# 
-# # Model conditional probabilities of population change during trends period
-#   if(!is.null(prob_decrease)) {
-#     ab <- ab %>%
-#       dplyr::mutate(
-#         pch_pp = purrr::map_df(.data$ch_pc, calc_prob_crease,
-#                                .env$prob_decrease, type = "decrease")) %>%
-#       tidyr::unnest("pch_pp") 
-#   }
-#   
-#   if(!is.null(prob_increase)){
-#     ab <- ab %>%
-#       dplyr::mutate(
-#         pch_pp = purrr::map_df(.data$ch_pc, calc_prob_crease,
-#                                .env$prob_increase, type = "increase")) %>%
-#       tidyr::unnest("pch_pp") 
-#   }
-#   
-# 
-# # filter and select only sections needed. 
-#  
-#  out <- ab |> 
-#   mutate(across(starts_with("prob"), ~ sum(.x, na.rm = TRUE)/length(.x)*100)) %>% 
-#   select(starts_with("p"))%>% 
-#    distinct()
-# 
+# prop_st
+# prop_lt 
 
 
 ```
