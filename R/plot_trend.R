@@ -16,7 +16,7 @@
 #'   hgams_plot <- plot_trend(raw_indices = input_option_1, model_indices = ldf_hgam,
 #'   pred_indices = preds_hgam, start_yr = 2014, end_yr = 2022)
 #'}
-plot_trend <- function(raw_indices = indat1,
+plot_trend <- function(raw_indices = NULL,
                        model_indices = ldf,
                        pred_indices =  preds_sm,
                        start_yr = 2014,
@@ -106,10 +106,6 @@ plot_trend <- function(raw_indices = indat1,
     ggplot2::geom_vline(xintercept = 2026, size=1, col = "black", alpha = 0.4, linetype="dotted")+
     ggplot2::geom_vline(xintercept = 2046, size=1, col = "black", alpha = 0.4, linetype="dotted")+
 
-    # Observed indices
-    ggplot2::geom_errorbar(data = subset(raw_indices, year <= max(raw_indices$year)),aes(x = year, ymin = index_q_0.025, ymax = index_q_0.975), width = 0, col = "gray30")+
-    ggplot2::geom_point(data = subset(raw_indices, year <= max(raw_indices$year)),aes(x = year, y = index), col = "gray30")+
-
     # gam smooth
     ggplot2::geom_ribbon(data = gam_summarized, aes(x = year, ymin = gam_q_0.025, ymax = gam_q_0.975), alpha = 0.4, fill = "gray50")+
     ggplot2::geom_line(data = gam_summarized, aes(x = year, y = gam_index), col = "gray50", linewidth = 1)+
@@ -122,6 +118,16 @@ plot_trend <- function(raw_indices = indat1,
     ggplot2::xlab("Year")+
     ggplot2::theme_bw()
 
+
+  if(!is.null(raw_indices)){
+
+    sp_plot_index <-  sp_plot_index +
+
+      # Observed indices
+      ggplot2::geom_errorbar(data = subset(raw_indices, year <= max(raw_indices$year)),aes(x = year, ymin = index_q_0.025, ymax = index_q_0.975), width = 0, col = "gray30")+
+      ggplot2::geom_point(data = subset(raw_indices, year <= max(raw_indices$year)),aes(x = year, y = index), col = "gray30")
+
+  }
 
 
   if(!is.null(targets)){
