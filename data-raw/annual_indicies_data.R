@@ -15,7 +15,7 @@ aou <- bbsBayes2::search_species("Pacific Wren")$aou[1]
 
 # loading the fitted model object
 #fit <- readRDS(paste0("C:/GitHub/CWS_2022_BBS_Analyses/output/fit_",aou,".rds"))
-fit <- readRDS(paste0("C:/r_repo/2024_ECCC_birdtrends/birdtrends_pif/fitted_models/fit_",aou,".rds"))
+fit <- readRDS(paste0("C:/r_repo/2024_ECCC_birdtrends/birdtrends_pif/01_fitted_models/fit_",aou,".rds"))
 
 
 indsmooth <- generate_indices(fit,regions = "country",
