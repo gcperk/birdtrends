@@ -101,8 +101,9 @@ indices.<a class="anchor" aria-label="anchor" href="#model-the-annual-indices-ba
 <p>In many cases, we may not have access to the breadth of information
 retained in estimating the original modeled annual indices.</p>
 <p>An example data set is provided within this package. This is an
-annual estimate on the Pacific Wren (” “), generated using the <a href="https://bbsbayes.github.io/bbsBayes2/" class="external-link">bbsBayes2</a> package. This
-data was kindly provided by A.C. Smith.</p>
+annual estimate on the Pacific Wren (“Troglodytes pacificus”), generated
+using the <a href="https://bbsbayes.github.io/bbsBayes2/" class="external-link">bbsBayes2</a>
+package. This data was kindly provided by A.C. Smith.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">annual_indicies_data</span><span class="op">)</span></span>
@@ -139,12 +140,12 @@ a known autocorrelation structure in the annual errors.</p>
 <span><span class="co">#&gt; Running MCMC with 4 parallel chains...</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Chain 1 finished in 2.0 seconds.</span></span>
-<span><span class="co">#&gt; Chain 2 finished in 2.1 seconds.</span></span>
-<span><span class="co">#&gt; Chain 4 finished in 2.1 seconds.</span></span>
-<span><span class="co">#&gt; Chain 3 finished in 2.3 seconds.</span></span>
+<span><span class="co">#&gt; Chain 3 finished in 2.2 seconds.</span></span>
+<span><span class="co">#&gt; Chain 4 finished in 2.2 seconds.</span></span>
+<span><span class="co">#&gt; Chain 2 finished in 2.3 seconds.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; All 4 chains finished successfully.</span></span>
-<span><span class="co">#&gt; Mean chain execution time: 2.1 seconds.</span></span>
+<span><span class="co">#&gt; Mean chain execution time: 2.2 seconds.</span></span>
 <span><span class="co">#&gt; Total execution time: 2.5 seconds.</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#fitted_data &lt;- fit_hgam(indat1, start_yr = 1990, end_yr = 2014, n_knots = NA)</span></span></code></pre></div>
@@ -333,101 +334,21 @@ probability that we will meet our short- term or long-term targets.</p>
 of 2% to increase of 1%) and longterm target (2046) is (increase between
 5 to 10% )</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="va">prop_st</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calculate_probs.html">calculate_probs</a></span><span class="op">(</span>predicted_trends <span class="op">=</span> <span class="va">preds_sm</span>,</span>
-<span>                ref_year <span class="op">=</span> <span class="fl">2014</span>, </span>
-<span>                targ_year <span class="op">=</span> <span class="fl">2026</span>, </span>
-<span>                prob_decrease <span class="op">=</span> <span class="fl">2</span>,</span>
-<span>                prob_increase <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">prop_lt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calculate_probs.html">calculate_probs</a></span><span class="op">(</span>predicted_trends <span class="op">=</span> <span class="va">preds_sm</span>,</span>
-<span>                ref_year <span class="op">=</span> <span class="fl">2014</span>, </span>
-<span>                targ_year <span class="op">=</span> <span class="fl">2046</span>,</span>
-<span>                prob_increase <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">10</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span></span>
-<span><span class="va">prop_st</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 4</span></span></span>
-<span><span class="co">#&gt;   prob_decrease_2_percent prob_increase_1_percent ref_year target_yr</span></span>
-<span><span class="co">#&gt;                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>                    88.9                    7.18     <span style="text-decoration: underline;">2</span>014      <span style="text-decoration: underline;">2</span>026</span></span></code></pre></div>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">prop_lt</span> </span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 4</span></span></span>
-<span><span class="co">#&gt;   prob_increase_5_percent prob_increase_10_percent ref_year target_yr</span></span>
-<span><span class="co">#&gt;                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>                     6.1                     5.03     <span style="text-decoration: underline;">2</span>014      <span style="text-decoration: underline;">2</span>046</span></span></code></pre></div>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span></span>
-<span> </span>
-<span><span class="co"># predicted_trends = preds_sm</span></span>
-<span><span class="co"># calc_quantiles &lt;- stats::quantile</span></span>
-<span><span class="co"># quantiles = c(0.025, 0.05, 0.25, 0.75, 0.95, 0.975)</span></span>
-<span><span class="co"># prob_decrease = c(0,2,50)</span></span>
-<span><span class="co"># prob_increase = c(0,2,50)</span></span>
+<code class="sourceCode R"><span><span class="co"># </span></span>
+<span><span class="co"># prop_st &lt;- calculate_probs(predicted_trends = preds_sm,</span></span>
+<span><span class="co">#                 ref_year = 2014, </span></span>
+<span><span class="co">#                 targ_year = 2026, </span></span>
+<span><span class="co">#                 prob_decrease = 2,</span></span>
+<span><span class="co">#                 prob_increase = 1)</span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># prop_lt &lt;- calculate_probs(predicted_trends = preds_sm,</span></span>
+<span><span class="co">#                 ref_year = 2014, </span></span>
+<span><span class="co">#                 targ_year = 2046,</span></span>
+<span><span class="co">#                 prob_increase = c(5,10))</span></span>
 <span><span class="co"># </span></span>
 <span><span class="co"># </span></span>
-<span><span class="co"># </span></span>
-<span><span class="co"># </span></span>
-<span><span class="co"># calc_prob_crease &lt;- function(x, p, type = "decrease") {</span></span>
-<span><span class="co">#   if(type == "decrease") f &lt;- function(p) length(x[x &lt; (-1 * p)]) / length(x)</span></span>
-<span><span class="co">#   if(type == "increase") f &lt;- function(p) length(x[x &gt; p]) / length(x)</span></span>
-<span><span class="co">#   </span></span>
-<span><span class="co">#   vapply(p, FUN = f, FUN.VALUE = 1.1) %&gt;%</span></span>
-<span><span class="co">#     stats::setNames(paste0("prob_", type, "_", p, "_percent"))</span></span>
-<span><span class="co"># }</span></span>
-<span><span class="co"># </span></span>
-<span><span class="co"># </span></span>
-<span><span class="co"># </span></span>
-<span><span class="co"># </span></span>
-<span><span class="co"># # for each draw subtract target year from ref year (2024) - 2014</span></span>
-<span><span class="co"># aa &lt;- filter(predicted_trends, year %in% c(2014, 2024)) |&gt; </span></span>
-<span><span class="co">#   select(-proj_y)</span></span>
-<span><span class="co">#   </span></span>
-<span><span class="co"># </span></span>
-<span><span class="co"># aa &lt;-  pivot_wider(aa, values_from = pred_ind, names_from = year)</span></span>
-<span><span class="co"># </span></span>
-<span><span class="co"># ab &lt;- aa |&gt; </span></span>
-<span><span class="co">#   mutate(ch = `2024`/`2014`) |&gt; </span></span>
-<span><span class="co">#   rowwise() |&gt; </span></span>
-<span><span class="co">#   mutate(ch_pc = 100 * (stats::median(ch) -1)) |&gt; </span></span>
-<span><span class="co">#   dplyr::ungroup() %&gt;%</span></span>
-<span><span class="co">#   mutate(percent_change_ave = 100 * (stats::median(ch)-1),</span></span>
-<span><span class="co">#         #percent_change_q_0.025 = 100 *  (stats::quantile(ch, probs = 0.025)-1),</span></span>
-<span><span class="co">#         #percent_change_q_0.05 = 100 *  (stats::quantile(ch, probs = 0.05)-1),</span></span>
-<span><span class="co">#         #percent_change_q_0.25 = 100 *  (stats::quantile(ch, probs = 0.25)-1),</span></span>
-<span><span class="co">#         #percent_change_q_0.75 = 100 *  (stats::quantile(ch, probs = 0.75)-1),</span></span>
-<span><span class="co">#         #percent_change_q_0.95 = 100 *  (stats::quantile(ch, probs = 0.95)-1),</span></span>
-<span><span class="co">#         percent_change_q_0.975 = 100 *  (stats::quantile(ch, probs = 0.975)-1))</span></span>
-<span><span class="co">#  </span></span>
-<span><span class="co">#  </span></span>
-<span><span class="co"># </span></span>
-<span><span class="co"># # Model conditional probabilities of population change during trends period</span></span>
-<span><span class="co">#   if(!is.null(prob_decrease)) {</span></span>
-<span><span class="co">#     ab &lt;- ab %&gt;%</span></span>
-<span><span class="co">#       dplyr::mutate(</span></span>
-<span><span class="co">#         pch_pp = purrr::map_df(.data$ch_pc, calc_prob_crease,</span></span>
-<span><span class="co">#                                .env$prob_decrease, type = "decrease")) %&gt;%</span></span>
-<span><span class="co">#       tidyr::unnest("pch_pp") </span></span>
-<span><span class="co">#   }</span></span>
-<span><span class="co">#   </span></span>
-<span><span class="co">#   if(!is.null(prob_increase)){</span></span>
-<span><span class="co">#     ab &lt;- ab %&gt;%</span></span>
-<span><span class="co">#       dplyr::mutate(</span></span>
-<span><span class="co">#         pch_pp = purrr::map_df(.data$ch_pc, calc_prob_crease,</span></span>
-<span><span class="co">#                                .env$prob_increase, type = "increase")) %&gt;%</span></span>
-<span><span class="co">#       tidyr::unnest("pch_pp") </span></span>
-<span><span class="co">#   }</span></span>
-<span><span class="co">#   </span></span>
-<span><span class="co"># </span></span>
-<span><span class="co"># # filter and select only sections needed. </span></span>
-<span><span class="co">#  </span></span>
-<span><span class="co">#  out &lt;- ab |&gt; </span></span>
-<span><span class="co">#   mutate(across(starts_with("prob"), ~ sum(.x, na.rm = TRUE)/length(.x)*100)) %&gt;% </span></span>
-<span><span class="co">#   select(starts_with("p"))%&gt;% </span></span>
-<span><span class="co">#    distinct()</span></span>
-<span><span class="co"># </span></span></code></pre></div>
+<span><span class="co"># prop_st</span></span>
+<span><span class="co"># prop_lt </span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
