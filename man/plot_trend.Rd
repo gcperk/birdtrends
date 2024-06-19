@@ -5,7 +5,7 @@
 \title{Plot predicted trends}
 \usage{
 plot_trend(
-  raw_indices = indat1,
+  raw_indices = NULL,
   model_indices = ldf,
   pred_indices = preds_sm,
   start_yr = 2014,

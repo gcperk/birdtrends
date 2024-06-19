@@ -166,18 +166,19 @@ trend_sm |>
 
 ```
 
-## 4. Predict trend
+## 4. Project trend
 
 We can now use our modeled annual indices and estimated trends for our given years to predict into the future. 
 
 ```{r}
-preds_sm <- predict_trend(ldf, trend_sm, start_yr = 2023, proj_yr = 2050)
+preds_sm <- proj_trend(ldf, trend_sm, start_yr = 2023, proj_yr = 2050)
 
 ```
 
 
 ```{r}
 head(preds_sm)
+
 ```
 
 
@@ -238,7 +239,7 @@ hgams_plot_target <- plot_trend(raw_indices = indat1,
 
 We can use the output of the trends to estimate uncertainty around meeting future trends. In the example above we can estimate the probability that we will meet our short- term or long-term targets. 
 
-Our theoretical targets for the above example is short term (decrease of 2% to increase of 1%) and longterm target (2046) is (increase between 5 to 10% )
+Our theoretical targets for the above example is short term (decrease of 2% to increase of 1%) and long term target (2046) is (increase between 5 to 10% )
 
 
 ```{r, eval = FALSE}

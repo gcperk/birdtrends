@@ -1,4 +1,4 @@
-#' Predict generated trends into the future
+#' Project generated trends into the future
 #'
 #' @param proj_output tibble of estimated indices drawn from fit_* function. Columns are draw, year, and proj_y
 #' @param trend_output tibble of estimated trends generated from get_trends* function.
@@ -12,7 +12,7 @@
 #' \dontrun{
 #'  trend_sm <- predict_trend(ldf_smooths, trend_sm, start_yr = 2023, proj_yr = 2046)
 #'}
-predict_trend <- function(proj_output,
+proj_trend <- function(proj_output,
                           trend_output,
                           start_yr = NA,
                           proj_yr = 2046){
