@@ -140,12 +140,12 @@ a known autocorrelation structure in the annual errors.</p>
 <span><span class="co">#&gt; Running MCMC with 4 parallel chains...</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Chain 1 finished in 2.0 seconds.</span></span>
-<span><span class="co">#&gt; Chain 3 finished in 2.2 seconds.</span></span>
+<span><span class="co">#&gt; Chain 2 finished in 2.1 seconds.</span></span>
+<span><span class="co">#&gt; Chain 3 finished in 2.1 seconds.</span></span>
 <span><span class="co">#&gt; Chain 4 finished in 2.2 seconds.</span></span>
-<span><span class="co">#&gt; Chain 2 finished in 2.3 seconds.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; All 4 chains finished successfully.</span></span>
-<span><span class="co">#&gt; Mean chain execution time: 2.2 seconds.</span></span>
+<span><span class="co">#&gt; Mean chain execution time: 2.1 seconds.</span></span>
 <span><span class="co">#&gt; Total execution time: 2.5 seconds.</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#fitted_data &lt;- fit_hgam(indat1, start_yr = 1990, end_yr = 2014, n_knots = NA)</span></span></code></pre></div>
@@ -216,12 +216,12 @@ indices per year and per posterior draw (n = 4000).</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 3</span></span></span>
 <span><span class="co">#&gt;    draw  year proj_y</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1  <span style="text-decoration: underline;">1</span>968   2.70</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     1  <span style="text-decoration: underline;">1</span>969   2.86</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     1  <span style="text-decoration: underline;">1</span>970   3.03</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     1  <span style="text-decoration: underline;">1</span>971   3.22</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>     1  <span style="text-decoration: underline;">1</span>972   3.44</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>     1  <span style="text-decoration: underline;">1</span>973   3.70</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1  <span style="text-decoration: underline;">1</span>968   2.47</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     1  <span style="text-decoration: underline;">1</span>969   2.65</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     1  <span style="text-decoration: underline;">1</span>970   2.84</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     1  <span style="text-decoration: underline;">1</span>971   3.08</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>     1  <span style="text-decoration: underline;">1</span>972   3.35</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>     1  <span style="text-decoration: underline;">1</span>973   3.65</span></span></code></pre></div>
 <p>Now we can estimate a trend based on a given time internal and method
 of estimating trends. Where no dates are specified, the minimum and
 maximum years will be used. Two methods are available to estimate
@@ -234,12 +234,12 @@ trends; 1) Geometric mean and 2) Linear regression.</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 3</span></span></span>
 <span><span class="co">#&gt;    draw trend_log perc_trend</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1   0.001<span style="text-decoration: underline;">08</span>      0.108</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2  -<span style="color: #BB0000;">0.024</span><span style="color: #BB0000; text-decoration: underline;">9</span>      -<span style="color: #BB0000;">2.46</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3  -<span style="color: #BB0000;">0.015</span><span style="color: #BB0000; text-decoration: underline;">1</span>      -<span style="color: #BB0000;">1.50</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4  -<span style="color: #BB0000;">0.018</span><span style="color: #BB0000; text-decoration: underline;">3</span>      -<span style="color: #BB0000;">1.81</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>     5  -<span style="color: #BB0000;">0.008</span><span style="color: #BB0000; text-decoration: underline;">42</span>     -<span style="color: #BB0000;">0.839</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>     6  -<span style="color: #BB0000;">0.019</span><span style="color: #BB0000; text-decoration: underline;">0</span>      -<span style="color: #BB0000;">1.88</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 -<span style="color: #BB0000;">0.024</span><span style="color: #BB0000; text-decoration: underline;">2</span>      -<span style="color: #BB0000;">2.39</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 -<span style="color: #BB0000;">0.016</span><span style="color: #BB0000; text-decoration: underline;">1</span>      -<span style="color: #BB0000;">1.59</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3  0.002<span style="text-decoration: underline;">29</span>      0.229 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 -<span style="color: #BB0000;">0.022</span><span style="color: #BB0000; text-decoration: underline;">3</span>      -<span style="color: #BB0000;">2.20</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>     5 -<span style="color: #BB0000;">0.000</span><span style="color: #BB0000; text-decoration: underline;">456</span>    -<span style="color: #BB0000;">0.045</span><span style="color: #BB0000; text-decoration: underline;">5</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>     6 -<span style="color: #BB0000;">0.025</span><span style="color: #BB0000; text-decoration: underline;">3</span>      -<span style="color: #BB0000;">2.50</span></span></span></code></pre></div>
 <p>We can summarise the trend estimates to provide a median and
 confidence internal</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
@@ -252,15 +252,15 @@ confidence internal</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span></span>
 <span><span class="co">#&gt;   trend_q0.025 trend_q0.500 trend_q0.975</span></span>
 <span><span class="co">#&gt;          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>      -<span style="color: #BB0000;">0.035</span><span style="color: #BB0000; text-decoration: underline;">3</span>      -<span style="color: #BB0000;">0.014</span><span style="color: #BB0000; text-decoration: underline;">3</span>      0.006<span style="text-decoration: underline;">46</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>      -<span style="color: #BB0000;">0.035</span><span style="color: #BB0000; text-decoration: underline;">0</span>      -<span style="color: #BB0000;">0.014</span><span style="color: #BB0000; text-decoration: underline;">1</span>      0.005<span style="text-decoration: underline;">94</span></span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="predict-trend">4. Predict trend<a class="anchor" aria-label="anchor" href="#predict-trend"></a>
+<h3 id="project-trend">4. Project trend<a class="anchor" aria-label="anchor" href="#project-trend"></a>
 </h3>
 <p>We can now use our modeled annual indices and estimated trends for
 our given years to predict into the future.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">preds_sm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/predict_trend.html">predict_trend</a></span><span class="op">(</span><span class="va">ldf</span>, <span class="va">trend_sm</span>, start_yr <span class="op">=</span> <span class="fl">2023</span>, proj_yr <span class="op">=</span> <span class="fl">2050</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">preds_sm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/proj_trend.html">proj_trend</a></span><span class="op">(</span><span class="va">ldf</span>, <span class="va">trend_sm</span>, start_yr <span class="op">=</span> <span class="fl">2023</span>, proj_yr <span class="op">=</span> <span class="fl">2050</span><span class="op">)</span></span>
 <span><span class="co">#&gt; hold tight, running the numbers!</span></span>
 <span><span class="co">#&gt; ================================================================================</span></span></code></pre></div>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
@@ -268,12 +268,12 @@ our given years to predict into the future.</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 4</span></span></span>
 <span><span class="co">#&gt;    draw  year proj_y pred_ind</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1  <span style="text-decoration: underline;">1</span>968   2.70     2.70</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     1  <span style="text-decoration: underline;">1</span>969   2.86     2.86</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     1  <span style="text-decoration: underline;">1</span>970   3.03     3.03</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     1  <span style="text-decoration: underline;">1</span>971   3.22     3.22</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>     1  <span style="text-decoration: underline;">1</span>972   3.44     3.44</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>     1  <span style="text-decoration: underline;">1</span>973   3.70     3.70</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1  <span style="text-decoration: underline;">1</span>968   2.47     2.47</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     1  <span style="text-decoration: underline;">1</span>969   2.65     2.65</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     1  <span style="text-decoration: underline;">1</span>970   2.84     2.84</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     1  <span style="text-decoration: underline;">1</span>971   3.08     3.08</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>     1  <span style="text-decoration: underline;">1</span>972   3.35     3.35</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>     1  <span style="text-decoration: underline;">1</span>973   3.65     3.65</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="plot-the-prediction">5. Plot the prediction<a class="anchor" aria-label="anchor" href="#plot-the-prediction"></a>
@@ -331,8 +331,8 @@ how our predictions are tracking.</p>
 meeting future trends. In the example above we can estimate the
 probability that we will meet our short- term or long-term targets.</p>
 <p>Our theoretical targets for the above example is short term (decrease
-of 2% to increase of 1%) and longterm target (2046) is (increase between
-5 to 10% )</p>
+of 2% to increase of 1%) and long term target (2046) is (increase
+between 5 to 10% )</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># </span></span>
 <span><span class="co"># prop_st &lt;- calculate_probs(predicted_trends = preds_sm,</span></span>
