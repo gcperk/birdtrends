@@ -1,6 +1,6 @@
 #' Calculate probability of meeting targets
 #'
-#' @param predicted_trends tibble with all draws, years, predicted trends, output of predict_trend function
+#' @param projected_trends tibble with all draws, years, projected trends, output of proj_trend function
 #' @param ref_year numeric year in which change is measured from i.e. 2014
 #' @param targ_year numeric year in which target will be reached i.e. 2026
 #' @param prob_decrease numeric vector of predicted target increase. i.e c(25, 35). Determine the probability that trend will increase 25% to 35% by target year
@@ -17,7 +17,7 @@
 #'         prob_increase = c(targ$st_pop_pc_lower,targ$st_pop_pc_uppper))
 #'}
 calculate_probs <- function(
-    predicted_trends = preds_sm,
+    projected_trends = preds_sm,
     ref_year = 2014,
     targ_year = 2026,
     prob_decrease = NULL,
@@ -25,7 +25,7 @@ calculate_probs <- function(
 
 
   # check in input values
-  uyrs <-  predicted_trends$year
+  uyrs <-  projected_trends$year
   if(!ref_year %in% uyrs){
     stop("reference year is not within input data, please re-select")
   }
@@ -66,7 +66,7 @@ calculate_probs <- function(
 
 
   # for each draw subtract target year from ref year (2024) - 2014
-  tyears <- dplyr::filter(predicted_trends, year %in% c(ref_year, targ_year)) |>
+  tyears <- dplyr::filter(projected_trends, year %in% c(ref_year, targ_year)) |>
     dplyr::select(-proj_y)
 
 

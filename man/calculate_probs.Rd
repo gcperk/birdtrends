@@ -5,7 +5,7 @@
 \title{Calculate probability of meeting targets}
 \usage{
 calculate_probs(
-  predicted_trends = preds_sm,
+  projected_trends = preds_sm,
   ref_year = 2014,
   targ_year = 2026,
   prob_decrease = NULL,
@@ -13,7 +13,7 @@ calculate_probs(
 )
 }
 \arguments{
-\item{predicted_trends}{tibble with all draws, years, predicted trends, output of predict_trend function}
+\item{projected_trends}{tibble with all draws, years, projected trends, output of proj_trend function}
 
 \item{ref_year}{numeric year in which change is measured from i.e. 2014}
 
