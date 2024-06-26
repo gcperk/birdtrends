@@ -6,7 +6,7 @@
 \usage{
 plot_trend(
   raw_indices = NULL,
-  model_indices = ldf,
+  model_indices = fitted_data,
   pred_indices = preds_sm,
   start_yr = 2014,
   end_yr = 2022,
