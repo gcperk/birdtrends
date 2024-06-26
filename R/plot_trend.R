@@ -58,7 +58,11 @@ plot_trend <- function(raw_indices = NULL,
     dplyr::group_by(year) %>%
     dplyr::summarize(gam_q_0.025 = stats::quantile(proj_y,0.025),
               gam_index = stats::quantile(proj_y,0.5),
-              gam_q_0.975 = stats::quantile(proj_y,0.975))
+              gam_q_0.975 = stats::quantile(proj_y,0.975),
+              gam_q_0.05 = stats::quantile(proj_y,0.05), # these are only used when no actual annual indices data
+              gam_q_0.95 = stats::quantile(proj_y,0.95))
+
+
 
   predict_summarized <- pred_indices |>
     dplyr::group_by(year)%>%
@@ -130,17 +134,15 @@ plot_trend <- function(raw_indices = NULL,
   }
 
   # note if no raw_indices is supplied then we can estimate these from the projected data
-  if(!is.null(raw_indices)){
+
+  if(is.null(raw_indices)){
 
     sp_plot_index <-  sp_plot_index +
 
-      # Observed indices
-      ggplot2::geom_errorbar(data = subset(raw_indices, year <= max(raw_indices$year)),aes(x = year, ymin = index_q_0.025, ymax = index_q_0.975), width = 0, col = "gray30")+
-      ggplot2::geom_point(data = subset(raw_indices, year <= max(raw_indices$year)),aes(x = year, y = index), col = "gray30")
+      ggplot2::geom_errorbar(data = subset(gam_summarized, year <= max(gam_summarized$year)),aes(x = year, ymin = gam_q_0.05, ymax = gam_q_0.95), width = 0, col = "gray30")+
+      ggplot2::geom_point(data = subset(gam_summarized , year <= max(gam_summarized$year)),aes(x = year, y = gam_index), col = "gray30")
 
   }
-
-
 
   if(!is.null(targets)){
 
