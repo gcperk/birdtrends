@@ -1,18 +1,18 @@
 #' Fit hierarchical GAM using annual indices and confidence interval
 #'
-#' @param indata dataframe with annual indices by year (row) ansd confidence intervals
+#' @param indata dataframe with annual indices by year (row) and confidence intervals
 #' @param start_yr numeric year at which to start model. Default is the first year available
 #' @param end_yr numeric year at which to end model. Default is the last year available
-#' @param n_knots number of knots used in the HGAM model, default is 5
-#'
-#' @return dataframe with modelled HGAM indices for given years
+#' @param n_knots number of knots used in the HGAM model, using default of one knot per 4 years of data
+#' @param longform TRUE/FALSE the output will be converted to a longform tibble with columns draw, year, proj_y. Default = TRUE
+#' @return tibble with modeled HGAM indices for given years
 #' @export
 #'
 #' @examples
 #' \dontrun{
 #'outsmooth <- fit_hgam(indata = indat1, start_yr = 1970, end_yr = 2020, n_knots = 5)
 #'}
-fit_hgam <- function(indata, start_yr = NA, end_yr = NA,  n_knots = 5){
+fit_hgam <- function(indata, start_yr = NA, end_yr = NA,  n_knots = NA, longform = TRUE){
 
   if (!requireNamespace("cmdstanr", quietly = TRUE)) {
     stop('You need to install the cmdstanr package; install with:
@@ -124,6 +124,16 @@ fit_hgam <- function(indata, start_yr = NA, end_yr = NA,  n_knots = 5){
 
   colnames(smooths) <- as.character(out$year)
 
+  if(longform){
+    #
+    smooths <- tibble::rowid_to_column( smooths, "draw") %>%
+      tidyr::pivot_longer(., cols = !starts_with("d")) %>%
+      dplyr::rename('year' = name, "proj_y" = value)%>%
+      mutate(year = as.integer(year))
+
+  }
+
   return(smooths)
+
 
 }
