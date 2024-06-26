@@ -4,7 +4,7 @@
 #' @param start_yr numeric year at which to start model. Default is the first year available
 #' @param end_yr numeric year at which to end model. Default is the last year available
 #' @param n_knots number of knots used in the gam model, default is 5
-#'
+#' @param longform TRUE/FALSE the output will be converted to a longform tibble with columns draw, year, proj_y. Default = TRUE
 #' @return dataframe with predicted
 #' @export
 #' @importFrom foreach '%do%'
@@ -12,7 +12,7 @@
 #' \dontrun{
 #'pred_dataset <- fit_gam(indat2, start_yr = 1990, end_yr = 2020, n_knots = 14)
 #'}
-fit_gam <- function(indata, start_yr = NA, end_yr = NA, n_knots = NA) {
+fit_gam <- function(indata, start_yr = NA, end_yr = NA, n_knots = NA,longform = TRUE) {
 
    # questions 1: - do we want to make the gam option flexible (tp vs cs)
 
@@ -96,6 +96,16 @@ fit_gam <- function(indata, start_yr = NA, end_yr = NA, n_knots = NA) {
   pred_df <- data.frame(preds)
   colnames(pred_df) = year_seq
   rownames(pred_df) <- NULL
+
+  if(longform){
+
+    pred_df <- tibble::rowid_to_column( pred_df, "draw") %>%
+      tidyr::pivot_longer(., cols = !starts_with("d")) %>%
+      dplyr::rename('year' = name, "proj_y" = value)%>%
+      mutate(year = as.integer(year))
+
+  }
+
 
   return(pred_df)
 
