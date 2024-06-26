@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 ```
 
 
-We can use the `birdtrends` package to model trends overtime based on annual indices datasets. These include information on year of data, index, and some form of uncertainty. 
+We can use the `birdtrends` package to estimate trends overtime based on annual indices data. These include information on year of data, index, and some form of uncertainty. 
 
 Note: this vignette assumes you had already followed the steps outlined [here](https://ninoxconsulting.github.io/birdtrends/articles/Getting_started.html)
 
@@ -56,7 +56,14 @@ We can fit a hierarchical Bayesian General Additive Model (HGAM) to estimate the
 indat1 <- annual_indicies_data
 
 fitted_data <- fit_hgam(indat1, start_yr = NA, end_yr = NA, n_knots = NA)
-#fitted_data <- fit_hgam(indat1, start_yr = 1990, end_yr = 2014, n_knots = NA)
+
+# output the same data in a long format for plotting purposes 
+fitted_data_wide <- fit_hgam(indat1, start_yr = NA, end_yr = NA, n_knots = NA, longform = FALSE)
+
+
+## We can also define the start and end time points or number of knots 
+
+# fitted_data <- fit_hgam(indat1, start_yr = 1990, end_yr = 2014, n_knots = NA)
 
 ```
 
@@ -68,7 +75,7 @@ In this example we selected 100 rows for simplicity.
 
 ```{r reformat fitted data from hgam}
 
-sel_hgams <- fitted_data %>%
+sel_hgams <- fitted_data_wide %>%
   dplyr::slice_sample(., n = 100) %>%  
   dplyr::mutate(draw = seq(1, 100, 1)) %>% 
   tidyr::pivot_longer(., cols = !starts_with("d")) |> 
