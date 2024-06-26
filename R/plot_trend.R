@@ -129,6 +129,22 @@ plot_trend <- function(raw_indices = NULL,
 
   }
 
+  # note if no raw_indices is supplied then we can estimate these from the projected data
+  if(!is.null(raw_indices)){
+
+    sp_plot_index <-  sp_plot_index +
+
+      # Observed indices
+      ggplot2::geom_errorbar(data = subset(raw_indices, year <= max(raw_indices$year)),aes(x = year, ymin = index_q_0.025, ymax = index_q_0.975), width = 0, col = "gray30")+
+      ggplot2::geom_point(data = subset(raw_indices, year <= max(raw_indices$year)),aes(x = year, y = index), col = "gray30")
+
+  }
+
+
+
+
+
+
 
   if(!is.null(targets)){
 
