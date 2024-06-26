@@ -17,7 +17,7 @@
 #'   pred_indices = preds_hgam, start_yr = 2014, end_yr = 2022)
 #'}
 plot_trend <- function(raw_indices = NULL,
-                       model_indices = ldf,
+                       model_indices = fitted_data,
                        pred_indices =  preds_sm,
                        start_yr = 2014,
                        end_yr = 2022,
@@ -139,10 +139,6 @@ plot_trend <- function(raw_indices = NULL,
       ggplot2::geom_point(data = subset(raw_indices, year <= max(raw_indices$year)),aes(x = year, y = index), col = "gray30")
 
   }
-
-
-
-
 
 
 
