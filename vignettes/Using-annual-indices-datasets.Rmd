@@ -123,28 +123,14 @@ comp_plot
 
 ## 3. Estimate trends
 
-We can use our modeled values to estimate a trend over a given period of time. This can be used to predict into the future. 
+We can use our modeled values (fitted_data) to estimate a trend over a given period of time. This can be used to project into the future. 
 
-First we need to reformat our fitted data. We can modify the object 'sel_hgams' above or reformat the raw output. 
-
-We will convert our data to long form, with the following columns "draw", "year", and "proj_y". Note if using the output from the "fit_hgam" we can use the code below. 
-
-```{r estimate trends}
-
-ldf <- tibble::rowid_to_column(fitted_data, "draw") %>%
-    tidyr::pivot_longer(., cols = !starts_with("d")) %>%
-    dplyr::rename('year' = name, "proj_y" = value)%>%
-    dplyr::mutate(year = as.integer(year))
-
-```
-
-This creates a dataset in which each row contains an estimated indices per year and per posterior draw (n = 4000). 
+Firstly lets review our data file, we can see each row contains an estimated indices per year and per posterior draw (n = 4000). The total lenght of the file is the number of draws x the number of years for which we have data. 
 
 ```{r}
-head(ldf)
+head(fitted_data)
 
 ```
-
 
 Now we can estimate a trend based on a given time internal and method of estimating trends. 
 Where no dates are specified, the minimum and maximum years will be used. Two methods are available to estimate trends; 1) Geometric mean and 2) Linear regression. 
@@ -152,7 +138,7 @@ Where no dates are specified, the minimum and maximum years will be used. Two me
 
 ```{r}
 
-trend_sm <- get_trend(ldf, start_yr = 2014, end_yr = 2022, method = "gmean")
+trend_sm <- get_trend(fitted_data, start_yr = 2014, end_yr = 2022, method = "gmean")
 
 ```
 
@@ -175,13 +161,12 @@ trend_sm |>
 
 ## 4. Project trend
 
-We can now use our modeled annual indices and estimated trends for our given years to predict into the future. 
+We can now use our modeled annual indices and estimated trends for our given years to project into the future. 
 
 ```{r}
-preds_sm <- proj_trend(ldf, trend_sm, start_yr = 2023, proj_yr = 2050)
+preds_sm <- proj_trend(fitted_data, trend_sm, start_yr = 2023, proj_yr = 2050)
 
 ```
-
 
 ```{r}
 head(preds_sm)
@@ -190,15 +175,14 @@ head(preds_sm)
 
 
 
-## 5. Plot the prediction 
+## 5. Plot the projected values
 
-Now lets plot the results, to make a "pretty plot" we will use all the steps we worked through above. This includes 1) raw observed indices, 2) modeled indices, 3) predicted indices generated from our trends. 
-
+Now lets plot the results, to make a "pretty plot" we will use all the steps we worked through above. This includes 1) raw observed indices, 2) modeled indices, 3) projected indices generated from our trends. 
 
 ```{r,  fig.width=7, fig.height= 5}
 
 hgams_plot <- plot_trend(raw_indices = indat1, 
-                          model_indices = ldf, 
+                          model_indices = fitted_data, 
                           pred_indices = preds_sm,
                           start_yr = 2014, 
                           end_yr = 2022)
