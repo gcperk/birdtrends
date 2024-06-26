@@ -4,7 +4,7 @@
 \alias{fit_gam}
 \title{Fit gam models on posterior draws}
 \usage{
-fit_gam(indata, start_yr = NA, end_yr = NA, n_knots = NA)
+fit_gam(indata, start_yr = NA, end_yr = NA, n_knots = NA, longform = TRUE)
 }
 \arguments{
 \item{indata}{dataframe of posterior draws. Each column is a year, each row is a posterior draw}
@@ -14,6 +14,8 @@ fit_gam(indata, start_yr = NA, end_yr = NA, n_knots = NA)
 \item{end_yr}{numeric year at which to end model. Default is the last year available}
 
 \item{n_knots}{number of knots used in the gam model, default is 5}
+
+\item{longform}{TRUE/FALSE the output will be converted to a longform tibble with columns draw, year, proj_y. Default = TRUE}
 }
 \value{
 dataframe with predicted

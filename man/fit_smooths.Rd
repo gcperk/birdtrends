@@ -4,7 +4,7 @@
 \alias{fit_smooths}
 \title{Extract Smooths from BBS model run}
 \usage{
-fit_smooths(indata, start_yr = NA, end_yr = NA)
+fit_smooths(indata, start_yr = NA, end_yr = NA, longform = TRUE)
 }
 \arguments{
 \item{indata}{dataframe of generated smooths. Each column is a year, each row is a predicted smooth}
@@ -12,6 +12,8 @@ fit_smooths(indata, start_yr = NA, end_yr = NA)
 \item{start_yr}{numeric year at which to start, if subset is required. Default is the last year available}
 
 \item{end_yr}{numeric year at which to end, if subset is required. Default is the last year available}
+
+\item{longform}{TRUE/FALSE the output will be converted to a longform tibble with columns draw, year, proj_y. Default = TRUE}
 }
 \value{
 dataframe with smooths generated for each year of the selected range

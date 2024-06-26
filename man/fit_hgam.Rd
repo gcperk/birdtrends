@@ -4,19 +4,21 @@
 \alias{fit_hgam}
 \title{Fit hierarchical GAM using annual indices and confidence interval}
 \usage{
-fit_hgam(indata, start_yr = NA, end_yr = NA, n_knots = 5)
+fit_hgam(indata, start_yr = NA, end_yr = NA, n_knots = NA, longform = TRUE)
 }
 \arguments{
-\item{indata}{dataframe with annual indices by year (row) ansd confidence intervals}
+\item{indata}{dataframe with annual indices by year (row) and confidence intervals}
 
 \item{start_yr}{numeric year at which to start model. Default is the first year available}
 
 \item{end_yr}{numeric year at which to end model. Default is the last year available}
 
-\item{n_knots}{number of knots used in the HGAM model, default is 5}
+\item{n_knots}{number of knots used in the HGAM model, using default of one knot per 4 years of data}
+
+\item{longform}{TRUE/FALSE the output will be converted to a longform tibble with columns draw, year, proj_y. Default = TRUE}
 }
 \value{
-dataframe with modelled HGAM indices for given years
+tibble with modeled HGAM indices for given years
 }
 \description{
 Fit hierarchical GAM using annual indices and confidence interval
