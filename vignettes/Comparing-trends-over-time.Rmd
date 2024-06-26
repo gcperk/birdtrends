@@ -1,0 +1,114 @@
+---
+title: "Comparing-trends-over-time"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Comparing-trends-over-time}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# written by Adam Smith 
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(birdtrends)
+library(ggplot2)
+library(patchwork)
+library(mgcv)
+library(dplyr)
+library(tidyr)
+
+
+```
+
+```{r}
+
+indat1 <- annual_indicies_data
+
+fitted_data <- fit_hgam(indat1,
+                        start_yr = NA,
+                        end_yr = NA,
+                        n_knots = NA)
+
+
+
+trend_short <- get_trend(fitted_data,
+                         start_yr = 2014,
+                         end_yr = 2022,
+                         method = "gmean") %>% 
+  rename(trend_short = perc_trend)
+
+
+trend_previous <- get_trend(fitted_data,
+                            start_yr = 2004,
+                            end_yr = 2014,
+                            method = "gmean")%>%
+  rename(trend_previous = perc_trend)
+
+
+trend_dif <- trend_previous %>%
+  inner_join(trend_short, by = "draw") %>%
+  mutate(trend_difference = trend_short-trend_previous)
+
+
+dif_trend <- round(quantile(trend_dif$trend_difference, c(0.05,0.5,0.95)),2)
+dif_trend
+
+
+# project into the future 
+
+proj_trend_short <- proj_trend(fitted_data,
+                               trend_short,
+                               start_yr = 2023,
+                               proj_yr = 2050)
+
+proj_trend_previous <- proj_trend(fitted_data,
+                                  trend_previous,
+                                  start_yr = 2015,
+                                  proj_yr = 2050)
+
+
+
+#Visualising the difference
+index_baseline <- get_targets(model_indices = fitted_data,
+                              ref_year = 2014,
+                              st_year = 2026,
+                              st_lu_target_pc = -2,
+                              st_up_target_pc = 1,
+                              lt_year = 2046,
+                              lt_lu_target_pc = 5,
+                              lt_up_target_pc = 10)
+
+plot_target_short <- plot_trend(raw_indices = indat1,
+                                model_indices = fitted_data,
+                                pred_indices = proj_trend_short,
+                                start_yr = 2014,
+                                end_yr = 2022,
+                                ref_yr = 2014,
+                                targets = index_baseline) +
+  labs(title = "Projection of recent trend from 2014-2022")+
+  scale_y_continuous(limits = c(0,NA))
+
+
+
+
+plot_target_previous <- plot_trend(raw_indices = indat1,
+                                   model_indices = fitted_data,
+                                   pred_indices = proj_trend_previous,
+                                   start_yr = 2004,
+                                   end_yr = 2014,
+                                   ref_yr = 2014,
+                                   targets = index_baseline) +
+  labs(title = "Projection of trend from 2004-2014") +
+  scale_y_continuous(limits = c(0,NA))
+
+print(plot_target_short / plot_target_previous)
+
+```
+
