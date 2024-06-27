@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(birdtrends)
 library(ggplot2)
-library(patchwork)
+#library(patchwork)
 library(mgcv)
 library(dplyr)
 library(tidyr)
@@ -108,7 +108,7 @@ plot_target_previous <- plot_trend(raw_indices = indat1,
   labs(title = "Projection of trend from 2004-2014") +
   scale_y_continuous(limits = c(0,NA))
 
-print(plot_target_short / plot_target_previous)
+#print(plot_target_short / plot_target_previous)
 
 ```
 
