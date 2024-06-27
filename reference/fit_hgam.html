@@ -24,6 +24,7 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/Comparing-trends-over-time.html">Comparing-trends-over-time</a>
     <a class="dropdown-item" href="../articles/Getting_started.html">Getting_started</a>
     <a class="dropdown-item" href="../articles/Using-annual-indices-datasets.html">Use annual indices and uncertainty to estimate trends over time</a>
   </div>
@@ -55,13 +56,13 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fit_hgam</span><span class="op">(</span><span class="va">indata</span>, start_yr <span class="op">=</span> <span class="cn">NA</span>, end_yr <span class="op">=</span> <span class="cn">NA</span>, n_knots <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fit_hgam</span><span class="op">(</span><span class="va">indata</span>, start_yr <span class="op">=</span> <span class="cn">NA</span>, end_yr <span class="op">=</span> <span class="cn">NA</span>, n_knots <span class="op">=</span> <span class="cn">NA</span>, longform <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>indata</dt>
-<dd><p>dataframe with annual indices by year (row) ansd confidence intervals</p></dd>
+<dd><p>dataframe with annual indices by year (row) and confidence intervals</p></dd>
 
 
 <dt>start_yr</dt>
@@ -73,14 +74,18 @@
 
 
 <dt>n_knots</dt>
-<dd><p>number of knots used in the HGAM model, default is 5</p></dd>
+<dd><p>number of knots used in the HGAM model, using default of one knot per 4 years of data</p></dd>
+
+
+<dt>longform</dt>
+<dd><p>TRUE/FALSE the output will be converted to a longform tibble with columns draw, year, proj_y. Default = TRUE</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>dataframe with modelled HGAM indices for given years</p>
+<p>tibble with modeled HGAM indices for given years</p>
     </div>
 
     <div class="section level2">

@@ -41,6 +41,7 @@
 <li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/Comparing-trends-over-time.html">Comparing-trends-over-time</a>
     <a class="dropdown-item" href="../articles/Getting_started.html">Getting_started</a>
     <a class="dropdown-item" href="../articles/Using-annual-indices-datasets.html">Use annual indices and uncertainty to estimate trends over time</a>
   </div>
@@ -78,9 +79,9 @@
 
     
     
-<p>We can use the <code>birdtrends</code> package to model trends
-overtime based on annual indices datasets. These include information on
-year of data, index, and some form of uncertainty.</p>
+<p>We can use the <code>birdtrends</code> package to estimate trends
+overtime based on annual indices data. These include information on year
+of data, index, and some form of uncertainty.</p>
 <p>Note: this vignette assumes you had already followed the steps
 outlined <a href="https://ninoxconsulting.github.io/birdtrends/articles/Getting_started.html">here</a></p>
 <div class="section level3">
@@ -139,32 +140,50 @@ a known autocorrelation structure in the annual errors.</p>
 <span><span class="va">fitted_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fit_hgam.html">fit_hgam</a></span><span class="op">(</span><span class="va">indat1</span>, start_yr <span class="op">=</span> <span class="cn">NA</span>, end_yr <span class="op">=</span> <span class="cn">NA</span>, n_knots <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Running MCMC with 4 parallel chains...</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Chain 1 finished in 2.0 seconds.</span></span>
-<span><span class="co">#&gt; Chain 2 finished in 2.1 seconds.</span></span>
 <span><span class="co">#&gt; Chain 3 finished in 2.1 seconds.</span></span>
-<span><span class="co">#&gt; Chain 4 finished in 2.2 seconds.</span></span>
+<span><span class="co">#&gt; Chain 1 finished in 2.2 seconds.</span></span>
+<span><span class="co">#&gt; Chain 2 finished in 2.2 seconds.</span></span>
+<span><span class="co">#&gt; Chain 4 finished in 2.1 seconds.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; All 4 chains finished successfully.</span></span>
 <span><span class="co">#&gt; Mean chain execution time: 2.1 seconds.</span></span>
-<span><span class="co">#&gt; Total execution time: 2.5 seconds.</span></span></code></pre></div>
+<span><span class="co">#&gt; Total execution time: 2.3 seconds.</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#fitted_data &lt;- fit_hgam(indat1, start_yr = 1990, end_yr = 2014, n_knots = NA)</span></span></code></pre></div>
+<code class="sourceCode R"><span></span>
+<span><span class="co"># output the same data in a long format for plotting purposes </span></span>
+<span><span class="va">fitted_data_wide</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fit_hgam.html">fit_hgam</a></span><span class="op">(</span><span class="va">indat1</span>, start_yr <span class="op">=</span> <span class="cn">NA</span>, end_yr <span class="op">=</span> <span class="cn">NA</span>, n_knots <span class="op">=</span> <span class="cn">NA</span>, longform <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Running MCMC with 4 parallel chains...</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Chain 1 finished in 2.1 seconds.</span></span>
+<span><span class="co">#&gt; Chain 3 finished in 2.1 seconds.</span></span>
+<span><span class="co">#&gt; Chain 4 finished in 2.1 seconds.</span></span>
+<span><span class="co">#&gt; Chain 2 finished in 2.3 seconds.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; All 4 chains finished successfully.</span></span>
+<span><span class="co">#&gt; Mean chain execution time: 2.2 seconds.</span></span>
+<span><span class="co">#&gt; Total execution time: 2.3 seconds.</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span></span>
+<span><span class="co">## We can also define the start and end time points or number of knots </span></span>
+<span></span>
+<span><span class="co"># fitted_data &lt;- fit_hgam(indat1, start_yr = 1990, end_yr = 2014, n_knots = NA)</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="explore-the-results">2.2 Explore the results<a class="anchor" aria-label="anchor" href="#explore-the-results"></a>
 </h4>
 <p>Select a subset of all the fitted HGAM models and reformat to long
 format. In this example we selected 100 rows for simplicity.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span><span class="va">sel_hgams</span> <span class="op">&lt;-</span> <span class="va">fitted_data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="va">sel_hgams</span> <span class="op">&lt;-</span> <span class="va">fitted_data_wide</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice_sample</a></span><span class="op">(</span><span class="va">.</span>, n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>  </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>draw <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">100</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span><span class="va">.</span>, cols <span class="op">=</span> <span class="op">!</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"d"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>yearn <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">name</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">name</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span>         </span></code></pre></div>
 <p>We can reformat our original data to use in the plot</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">min_year</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">sel_hgams</span><span class="op">$</span><span class="va">name</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">max_year</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">sel_hgams</span><span class="op">$</span><span class="va">name</span><span class="op">)</span><span class="op">)</span></span>
@@ -174,7 +193,7 @@ format. In this example we selected 100 rows for simplicity.</p>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>yearn <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>  </span></code></pre></div>
 <p>Now we can plot the predicted posterior distributions of 100 draws,
 along with the raw annual indices data provided.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">comp_plot</span> <span class="op">&lt;-</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">sel_hgams</span>,</span>
 <span>                    <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">yearn</span>,y <span class="op">=</span> <span class="va">value</span>,</span>
 <span>                        group <span class="op">=</span> <span class="va">draw</span>, colour <span class="op">=</span> <span class="va">draw</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
@@ -188,7 +207,7 @@ along with the raw annual indices data provided.</p>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html" class="external-link">scale_colour_viridis_c</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>trans <span class="op">=</span> <span class="st">"log10"</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">comp_plot</span></span></code></pre></div>
 <p><img src="Using-annual-indices-datasets_files/figure-html/unnamed-chunk-4-1.png" width="480"></p>
 </div>
@@ -196,50 +215,41 @@ along with the raw annual indices data provided.</p>
 <div class="section level3">
 <h3 id="estimate-trends">3. Estimate trends<a class="anchor" aria-label="anchor" href="#estimate-trends"></a>
 </h3>
-<p>We can use our modeled values to estimate a trend over a given period
-of time. This can be used to predict into the future.</p>
-<p>First we need to reformat our fitted data. We can modify the object
-‘sel_hgams’ above or reformat the raw output.</p>
-<p>We will convert our data to long form, with the following columns
-“draw”, “year”, and “proj_y”. Note if using the output from the
-“fit_hgam” we can use the code below.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="va">ldf</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html" class="external-link">rowid_to_column</a></span><span class="op">(</span><span class="va">fitted_data</span>, <span class="st">"draw"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span><span class="va">.</span>, cols <span class="op">=</span> <span class="op">!</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"d"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span><span class="st">'year'</span> <span class="op">=</span> <span class="va">name</span>, <span class="st">"proj_y"</span> <span class="op">=</span> <span class="va">value</span><span class="op">)</span><span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>This creates a dataset in which each row contains an estimated
-indices per year and per posterior draw (n = 4000).</p>
+<p>We can use our modeled values (fitted_data) to estimate a trend over
+a given period of time. This can be used to project into the future.</p>
+<p>Firstly lets review our data file, we can see each row contains an
+estimated indices per year and per posterior draw (n = 4000). The total
+lenght of the file is the number of draws x the number of years for
+which we have data.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">ldf</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">fitted_data</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 3</span></span></span>
 <span><span class="co">#&gt;    draw  year proj_y</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1  <span style="text-decoration: underline;">1</span>968   2.47</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     1  <span style="text-decoration: underline;">1</span>969   2.65</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     1  <span style="text-decoration: underline;">1</span>970   2.84</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     1  <span style="text-decoration: underline;">1</span>971   3.08</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>     1  <span style="text-decoration: underline;">1</span>972   3.35</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>     1  <span style="text-decoration: underline;">1</span>973   3.65</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1  <span style="text-decoration: underline;">1</span>968   2.17</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     1  <span style="text-decoration: underline;">1</span>969   2.36</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     1  <span style="text-decoration: underline;">1</span>970   2.58</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     1  <span style="text-decoration: underline;">1</span>971   2.85</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>     1  <span style="text-decoration: underline;">1</span>972   3.17</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>     1  <span style="text-decoration: underline;">1</span>973   3.55</span></span></code></pre></div>
 <p>Now we can estimate a trend based on a given time internal and method
 of estimating trends. Where no dates are specified, the minimum and
 maximum years will be used. Two methods are available to estimate
 trends; 1) Geometric mean and 2) Linear regression.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span><span class="va">trend_sm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_trend.html">get_trend</a></span><span class="op">(</span><span class="va">ldf</span>, start_yr <span class="op">=</span> <span class="fl">2014</span>, end_yr <span class="op">=</span> <span class="fl">2022</span>, method <span class="op">=</span> <span class="st">"gmean"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">trend_sm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_trend.html">get_trend</a></span><span class="op">(</span><span class="va">fitted_data</span>, start_yr <span class="op">=</span> <span class="fl">2014</span>, end_yr <span class="op">=</span> <span class="fl">2022</span>, method <span class="op">=</span> <span class="st">"gmean"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">trend_sm</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 3</span></span></span>
 <span><span class="co">#&gt;    draw trend_log perc_trend</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 -<span style="color: #BB0000;">0.024</span><span style="color: #BB0000; text-decoration: underline;">2</span>      -<span style="color: #BB0000;">2.39</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 -<span style="color: #BB0000;">0.016</span><span style="color: #BB0000; text-decoration: underline;">1</span>      -<span style="color: #BB0000;">1.59</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3  0.002<span style="text-decoration: underline;">29</span>      0.229 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 -<span style="color: #BB0000;">0.022</span><span style="color: #BB0000; text-decoration: underline;">3</span>      -<span style="color: #BB0000;">2.20</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>     5 -<span style="color: #BB0000;">0.000</span><span style="color: #BB0000; text-decoration: underline;">456</span>    -<span style="color: #BB0000;">0.045</span><span style="color: #BB0000; text-decoration: underline;">5</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>     6 -<span style="color: #BB0000;">0.025</span><span style="color: #BB0000; text-decoration: underline;">3</span>      -<span style="color: #BB0000;">2.50</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1  -<span style="color: #BB0000;">0.004</span><span style="color: #BB0000; text-decoration: underline;">23</span>     -<span style="color: #BB0000;">0.422</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2  -<span style="color: #BB0000;">0.003</span><span style="color: #BB0000; text-decoration: underline;">03</span>     -<span style="color: #BB0000;">0.303</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3  -<span style="color: #BB0000;">0.028</span><span style="color: #BB0000; text-decoration: underline;">7</span>      -<span style="color: #BB0000;">2.83</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4  -<span style="color: #BB0000;">0.021</span><span style="color: #BB0000; text-decoration: underline;">4</span>      -<span style="color: #BB0000;">2.12</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>     5  -<span style="color: #BB0000;">0.013</span><span style="color: #BB0000; text-decoration: underline;">8</span>      -<span style="color: #BB0000;">1.37</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>     6  -<span style="color: #BB0000;">0.017</span><span style="color: #BB0000; text-decoration: underline;">1</span>      -<span style="color: #BB0000;">1.69</span></span></span></code></pre></div>
 <p>We can summarise the trend estimates to provide a median and
 confidence internal</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
@@ -252,15 +262,15 @@ confidence internal</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span></span>
 <span><span class="co">#&gt;   trend_q0.025 trend_q0.500 trend_q0.975</span></span>
 <span><span class="co">#&gt;          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>      -<span style="color: #BB0000;">0.035</span><span style="color: #BB0000; text-decoration: underline;">0</span>      -<span style="color: #BB0000;">0.014</span><span style="color: #BB0000; text-decoration: underline;">1</span>      0.005<span style="text-decoration: underline;">94</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>      -<span style="color: #BB0000;">0.034</span><span style="color: #BB0000; text-decoration: underline;">6</span>      -<span style="color: #BB0000;">0.014</span><span style="color: #BB0000; text-decoration: underline;">4</span>      0.005<span style="text-decoration: underline;">58</span></span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="project-trend">4. Project trend<a class="anchor" aria-label="anchor" href="#project-trend"></a>
 </h3>
 <p>We can now use our modeled annual indices and estimated trends for
-our given years to predict into the future.</p>
+our given years to project into the future.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">preds_sm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/proj_trend.html">proj_trend</a></span><span class="op">(</span><span class="va">ldf</span>, <span class="va">trend_sm</span>, start_yr <span class="op">=</span> <span class="fl">2023</span>, proj_yr <span class="op">=</span> <span class="fl">2050</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">preds_sm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/proj_trend.html">proj_trend</a></span><span class="op">(</span><span class="va">fitted_data</span>, <span class="va">trend_sm</span>, start_yr <span class="op">=</span> <span class="fl">2023</span>, proj_yr <span class="op">=</span> <span class="fl">2050</span><span class="op">)</span></span>
 <span><span class="co">#&gt; hold tight, running the numbers!</span></span>
 <span><span class="co">#&gt; ================================================================================</span></span></code></pre></div>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
@@ -268,24 +278,24 @@ our given years to predict into the future.</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 4</span></span></span>
 <span><span class="co">#&gt;    draw  year proj_y pred_ind</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1  <span style="text-decoration: underline;">1</span>968   2.47     2.47</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     1  <span style="text-decoration: underline;">1</span>969   2.65     2.65</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     1  <span style="text-decoration: underline;">1</span>970   2.84     2.84</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     1  <span style="text-decoration: underline;">1</span>971   3.08     3.08</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>     1  <span style="text-decoration: underline;">1</span>972   3.35     3.35</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>     1  <span style="text-decoration: underline;">1</span>973   3.65     3.65</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1  <span style="text-decoration: underline;">1</span>968   2.17     2.17</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     1  <span style="text-decoration: underline;">1</span>969   2.36     2.36</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     1  <span style="text-decoration: underline;">1</span>970   2.58     2.58</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     1  <span style="text-decoration: underline;">1</span>971   2.85     2.85</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>     1  <span style="text-decoration: underline;">1</span>972   3.17     3.17</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>     1  <span style="text-decoration: underline;">1</span>973   3.55     3.55</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="plot-the-prediction">5. Plot the prediction<a class="anchor" aria-label="anchor" href="#plot-the-prediction"></a>
+<h3 id="plot-the-projected-values">5. Plot the projected values<a class="anchor" aria-label="anchor" href="#plot-the-projected-values"></a>
 </h3>
 <p>Now lets plot the results, to make a “pretty plot” we will use all
 the steps we worked through above. This includes 1) raw observed
-indices, 2) modeled indices, 3) predicted indices generated from our
+indices, 2) modeled indices, 3) projected indices generated from our
 trends.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">hgams_plot</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_trend.html">plot_trend</a></span><span class="op">(</span>raw_indices <span class="op">=</span> <span class="va">indat1</span>, </span>
-<span>                          model_indices <span class="op">=</span> <span class="va">ldf</span>, </span>
+<span>                          model_indices <span class="op">=</span> <span class="va">fitted_data</span>, </span>
 <span>                          pred_indices <span class="op">=</span> <span class="va">preds_sm</span>,</span>
 <span>                          start_yr <span class="op">=</span> <span class="fl">2014</span>, </span>
 <span>                          end_yr <span class="op">=</span> <span class="fl">2022</span><span class="op">)</span></span></code></pre></div>
@@ -305,7 +315,7 @@ in population.</p>
 This can be added to our plots to identify the range we need to meet or
 how our predictions are tracking.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">index_baseline</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_targets.html">get_targets</a></span><span class="op">(</span>model_indices <span class="op">=</span> <span class="va">ldf</span>, </span>
+<code class="sourceCode R"><span><span class="va">index_baseline</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_targets.html">get_targets</a></span><span class="op">(</span>model_indices <span class="op">=</span> <span class="va">fitted_data</span>, </span>
 <span>                              ref_year <span class="op">=</span> <span class="fl">2014</span>, </span>
 <span>                              st_year <span class="op">=</span> <span class="fl">2026</span>, </span>
 <span>                              st_lu_target_pc <span class="op">=</span> <span class="op">-</span><span class="fl">2</span>,</span>
@@ -316,7 +326,7 @@ how our predictions are tracking.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">hgams_plot_target</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_trend.html">plot_trend</a></span><span class="op">(</span>raw_indices <span class="op">=</span> <span class="va">indat1</span>, </span>
-<span>                          model_indices <span class="op">=</span> <span class="va">ldf</span>, </span>
+<span>                          model_indices <span class="op">=</span> <span class="va">fitted_data</span>, </span>
 <span>                          pred_indices <span class="op">=</span> <span class="va">preds_sm</span>,</span>
 <span>                          start_yr <span class="op">=</span> <span class="fl">2014</span>, </span>
 <span>                          end_yr <span class="op">=</span> <span class="fl">2022</span>, </span>

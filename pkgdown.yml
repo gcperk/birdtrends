@@ -2,9 +2,10 @@ pandoc: 3.1.11
 pkgdown: 2.0.9
 pkgdown_sha: ~
 articles:
+  Comparing-trends-over-time: Comparing-trends-over-time.html
   Getting_started: Getting_started.html
   Using-annual-indices-datasets: Using-annual-indices-datasets.html
-last_built: 2024-06-19T17:30Z
+last_built: 2024-06-27T21:43Z
 urls:
   reference: https://ninoxconsulting.github.io/birdtrends/reference
   article: https://ninoxconsulting.github.io/birdtrends/articles
