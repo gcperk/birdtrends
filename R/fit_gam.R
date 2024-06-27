@@ -102,7 +102,7 @@ fit_gam <- function(indata, start_yr = NA, end_yr = NA, n_knots = NA,longform = 
     pred_df <- tibble::rowid_to_column( pred_df, "draw") %>%
       tidyr::pivot_longer(., cols = !starts_with("d")) %>%
       dplyr::rename('year' = name, "proj_y" = value)%>%
-      mutate(year = as.integer(year))
+      dplyr::mutate(year = as.integer(year))
 
   }
 

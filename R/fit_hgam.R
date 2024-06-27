@@ -129,7 +129,7 @@ fit_hgam <- function(indata, start_yr = NA, end_yr = NA,  n_knots = NA, longform
     smooths <- tibble::rowid_to_column( smooths, "draw") %>%
       tidyr::pivot_longer(., cols = !starts_with("d")) %>%
       dplyr::rename('year' = name, "proj_y" = value)%>%
-      mutate(year = as.integer(year))
+      dplyr::mutate(year = as.integer(year))
 
   }
 

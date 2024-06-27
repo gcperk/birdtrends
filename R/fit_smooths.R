@@ -49,7 +49,7 @@ fit_smooths <- function(indata, start_yr = NA, end_yr = NA, longform = TRUE){
     smooth_out <- tibble::rowid_to_column( smooth_out, "draw") %>%
       tidyr::pivot_longer(., cols = !starts_with("d")) %>%
       dplyr::rename('year' = name, "proj_y" = value)%>%
-      mutate(year = as.integer(year))
+      dplyr::mutate(year = as.integer(year))
 
   }
 
