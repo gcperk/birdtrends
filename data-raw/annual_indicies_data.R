@@ -47,6 +47,7 @@ annual_indicies_data = input_option_1
 # column names = year
 # row names = draw | iteration
 input_option_2 <- as.data.frame(inds$samples$country_Canada)
+posterior_draws_data <- input_option_2
 
 #saveRDS(input_option_2, file = file.path("data", "input_data2.rds"))
 
@@ -57,10 +58,11 @@ input_option_2 <- as.data.frame(inds$samples$country_Canada)
 # row names = draw | iteration
 # identical structure to option 2, but not requiring the extra step of fitting an additional GAM to smooth through time
 input_option_3 <- indsmooth$samples$country_Canada
+bbs_smooth_data <- input_option_3
 
 #saveRDS(input_option_3, file = file.path("data", "input_data3.rds"))
 
 
-
-
 usethis::use_data(annual_indicies_data, overwrite = TRUE)
+usethis::use_data(posterior_draws_data, overwrite = TRUE)
+usethis::use_data(bbs_smooth_data, overwrite = TRUE)
