@@ -14,7 +14,7 @@
 #'}
 fit_gam <- function(indata, start_yr = NA, end_yr = NA, n_knots = NA,longform = TRUE) {
 
-   # questions 1: - do we want to make the gam option flexible (tp vs cs)
+  # possible improvement: add gam option flexible (tp vs cs)
 
   #  # testing lines
   #indata = indat2
