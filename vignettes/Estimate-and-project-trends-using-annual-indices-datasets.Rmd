@@ -1,8 +1,8 @@
 ---
-title: "Use annual indices and uncertainty to estimate trends over time"
+title: "Estimate and projecttrends over time"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Use annual indices and uncertainty to estimate trends over time}
+  %\VignetteIndexEntry{Estimate and projecttrends over time}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
