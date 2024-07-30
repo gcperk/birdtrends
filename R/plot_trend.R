@@ -149,15 +149,14 @@ plot_trend <- function(raw_indices = NULL,
     sp_plot_index <-  sp_plot_index +
 
     # target range - short term
-    ggplot2::geom_errorbar(data = targets , aes(x = st_year, ymin = st_lu_target, ymax = st_up_target), width = 1, size = 0.75,col = "blue")+
-
+    ggplot2::geom_errorbar(data = targets , aes(x = st_year, ymin = st_lu_target, ymax = st_up_target), width = 1, linewidth = 0.75,col = "blue")+
     ggplot2::geom_line(data = target_indices, aes(x = st_year_seq, y = st_index_seq), col = "blue", linewidth = 1)+
     #ggplot2::geom_line(data = target_indices_lt, aes(x = lt_year_seq, y = lt_index_seq), col = "blue", linewidth = 1)+
     #ggplot2::geom_linerange(data = targets , aes(x = st_year, ymin = st_lu_target, ymax = st_up_target), col = "blue")+
 
     if(!is.na(targets$lt_year)){
     # target range - short term
-    ggplot2::geom_errorbar(data = targets ,aes(x = lt_year, ymin = lt_lu_target, ymax =lt_up_target), width = 1, size = 0.75, col = "blue")
+    ggplot2::geom_errorbar(data = targets ,aes(x = lt_year, ymin = lt_lu_target, ymax =lt_up_target), width = 1, linewidth = 0.75, col = "blue")
     #ggplot2::geom_point(data = Index_baseline,aes(x = 2024, y = ave_ref_index), col = "blue", size = 2)+
                 }
 
