@@ -76,12 +76,11 @@ trend_previous <- get_trend(fitted_data,
 
 
 
-###3. Plot trends relative to targets
+### 3. Plot trends relative to targets
 
 To visualize the difference in trends we can project each trend and generate a plot to show the difference.
 
-```{r projected trend}
-
+```{r projected trend, results = FALSE}
 # project short term trend
 proj_trend_short <- proj_trend(fitted_data,
                                trend_short,
@@ -116,8 +115,6 @@ plot_target_short <- plot_trend(raw_indices = indat1,
                                 targets = index_baseline) +
   labs(title = "Projection of recent trend from 2014-2022")+
   scale_y_continuous(limits = c(0,NA))
-
-
 # generate short term plot 
 plot_target_previous <- plot_trend(raw_indices = indat1,
                                    model_indices = fitted_data,
@@ -129,12 +126,13 @@ plot_target_previous <- plot_trend(raw_indices = indat1,
   labs(title = "Projection of trend from 2004-2014") +
   scale_y_continuous(limits = c(0,NA))
 
+```
 
-
+```{r fig.width = 8, fig.height= 10} 
 print(plot_target_short / plot_target_previous)
 
-
 ```
+
 
 The upper plot shows the projected recent short-term trend, which suggests there is only
 a small probability of the species meeting the 2026 or 2046 targets (the orange uncertainty
@@ -163,11 +161,19 @@ dif_trend
 ```
 
 
-The short-term recent trend since 2014 is 2.25% greater from the trend between 2004 and
-2014, and that difference is clearly positive, with a 95% confidence interval from XXX [0.12:4.43]). 
+```{r get values internal , echo = FALSE}
+
+pc5 <- as.numeric(dif_trend[1])
+pc95 <- as.numeric(dif_trend[3])
+med <- as.numeric(dif_trend[2])
+
+```
+
+
+The short-term recent trend since 2014 is `r med`% greater from the trend between 2004 and
+2014, and that difference is clearly positive, with a 95% confidence interval from `r pc5` to `r pc95`. 
 
 This comparison shows that if the short-term trend estimated between 2004 and 2014 had continued, the species would be further from reaching the targets. So while the ongoing decline is troubling, the species recent trends suggest the population is closer to meeting the targets than they were in 2014.
-
 
 
 ```
