@@ -1,0 +1,124 @@
+---
+title: "Estimate-and-project-trends-using-BBS-smooth-dataset"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Estimate-and-project-trends-using-BBS-smooth-dataset}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This vignette provides an alternate method for estimating and predicting trends, similar to those described in the base workflow with [annual indices data input](https://ninoxconsulting.github.io/birdtrends/articles/Estimate-and-project-trends-using-annual-indices-datasets.html). 
+
+Rather than annual indices, this workflow uses draws of the posterior distributions of the smooth component of population trajectory, drawn from a GAMYE Breeding Bird Survey (BBS) model (using bbsBayes2 package). 
+
+Note: this vignette assumes you had already followed the steps outlined [here](https://ninoxconsulting.github.io/birdtrends/articles/Getting_started.html)
+
+## 1. Set-up
+
+Lets start by loading all the libraries required.
+
+```{r setup, warning = FALSE, message =FALSE}
+library(birdtrends)
+library(ggplot2)
+library(mgcv)
+library(dplyr)
+library(tidyr)
+```
+
+## 2. Extract the smooth component of bbsBayes2 fit
+
+An example data set is provided within this package. This is the smooth component extracted from the full model of the Pacific Wren ("Troglodytes pacificus"), generated using the [bbsBayes2](https://bbsbayes.github.io/bbsBayes2/) package. This data was kindly provided by A.C. Smith. 
+
+```{r view input dataset}
+
+head(bbs_smooth_data)
+
+```
+
+This dataset contains a modelled trajectory (annual indices) for each year (column) (1968 to 2022) and for each draw (row). This example dataset contains 4000 draws. 
+
+We can filter this data by year or change the format, using the longform parameter.
+
+```{r}
+indat3 <- as.data.frame(bbs_smooth_data)
+    
+fitted_smooths_wide <- fit_smooths(indat3, start_yr = NA, end_yr = NA, longform = FALSE)
+    
+fitted_smooths <- fit_smooths(indat3, start_yr = NA, end_yr = NA, longform = TRUE)
+    
+```
+
+
+### 3. Calculate trend 
+
+
+```{r reformat fitted data from hgam}
+
+trend_sm <- get_trend(fitted_smooths, start_yr = 2014, end_yr = 2022, method = "gmean")
+         
+```
+
+
+We can summarise the trend estimates to provide a median and confidence internal
+
+```{r}
+trend_sm |> 
+  dplyr::mutate(trend_q0.025 = quantile(trend_log, 0.025),
+         trend_q0.500 = quantile(trend_log,0.500),
+         trend_q0.975 = quantile(trend_log,0.975)) |> 
+  dplyr::select(c(trend_q0.025, trend_q0.500, trend_q0.975)) |> 
+  distinct()
+
+```
+
+### 4. Project trend
+
+We can now use our modeled annual indices and estimated trends for our given years to project into the future. 
+
+```{r}
+
+preds_sm <- proj_trend(fitted_smooths, trend_sm, start_yr = 2023, proj_yr = 2050)
+     
+
+```
+
+
+
+### 5. Plot the projected values
+
+Now lets plot the results, to make a "pretty plot" we will use all the steps we worked through above. This includes 1) raw observed indices, 2) modeled indices, 3) projected indices generated from our trends. 
+
+Note in the plot below we only had the posterior draws input data and not the raw annual estimates. In these cases where no raw indices is supplied, values are based on 95% of distribution of data. 
+
+
+```{r}
+   smooth_plot <- plot_trend(raw_indices = NULL,
+                             model_indices = fitted_smooths,
+                             pred_indices = preds_sm,
+                             start_yr = 2014,
+                             end_yr = 2022)
+
+   smooth_plot
+```
+Alternatively we can add our raw annual indices dataset to improve the aesthetics of the plot. 
+
+```{r}
+
+indat1 <- annual_indicies_data
+
+smooth_plot2 <- plot_trend(raw_indices = indat1,
+                             model_indices = fitted_smooths,
+                             pred_indices = preds_sm,
+                             start_yr = 2014,
+                             end_yr = 2022)
+
+smooth_plot2
+
+```
