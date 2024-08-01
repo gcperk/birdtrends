@@ -44,7 +44,6 @@ get_trend <- function(proj_data, start_yr = NA, end_yr = NA, method = "gmean"){
             "the data (", end_yr <- max_yr, ") instead.")
   }
 
-
   # subset data based on the selected years
   trend_dat <- subset(proj_data, year %in% seq(start_yr, end_yr)) %>%
     dplyr::arrange(year)
