@@ -47,7 +47,7 @@ get_targets <- function(model_indices = ldf,
   }
 
    if(st_lu_target_pc > st_up_target_pc){
-     stop("st_lower confidence is higher than upper confifence value")
+     stop("st_lower confidence is higher than upper confidence value")
    }
 
 
