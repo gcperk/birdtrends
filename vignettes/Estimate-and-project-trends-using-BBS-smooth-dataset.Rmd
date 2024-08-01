@@ -107,7 +107,7 @@ Note in the plot below we only had the posterior draws input data and not the ra
 
    smooth_plot
 ```
-Alternatively we can add our raw annual indices dataset to improve the aesthetics of the plot. 
+Alternatively we can add our raw annual indices data set to improve the aesthetics of the plot. 
 
 ```{r}
 
