@@ -15,4 +15,4 @@ test_that("get_trend warnings appropriate", {
   #expect_equal(cp$prob_increase_5_percent, 100)
 })
 
-#testthat::test_file("tests/testthat/test-get_trend.R")
+#testthat::test_file("tests/testthat/test-trend_check.R")
