@@ -15,7 +15,7 @@ plot_trend(
 )
 }
 \arguments{
-\item{raw_indices}{tibble with raw annual index value of observed data columns = year, index, index_q_0.25 = 2.5\% confidence interval and index_q_0.975 = 97.5 \% confidence interval}
+\item{raw_indices}{tibble with raw annual index value of observed data columns = year, index, index_q_0.25 = 2.5\% confidence interval and index_q_0.975 = 97.5 \% confidence interval. If raw indices are unavavilable these will be generated based on 5 and 95 percent range}
 
 \item{model_indices}{tibble of estimated indices drawn from fit_* function. Columns are draw, year, and proj_y}
 

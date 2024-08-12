@@ -1,6 +1,6 @@
 #' Plot predicted trends
 #'
-#' @param raw_indices tibble with raw annual index value of observed data columns = year, index, index_q_0.25 = 2.5% confidence interval and index_q_0.975 = 97.5 % confidence interval
+#' @param raw_indices tibble with raw annual index value of observed data columns = year, index, index_q_0.25 = 2.5% confidence interval and index_q_0.975 = 97.5 % confidence interval. If raw indices are unavavilable these will be generated based on 5 and 95 percent range
 #' @param model_indices tibble of estimated indices drawn from fit_* function. Columns are draw, year, and proj_y
 #' @param pred_indices datatable with modeled and predicted values into the future
 #' @param start_yr numeric value of the first year in which trend will be calculated. Default is first available year within the dataset
@@ -99,6 +99,19 @@ plot_trend <- function(raw_indices = NULL,
 
   }
 
+
+  # set xlim as needed ensure that the maximum xlim is not more than 4 times the max actual data
+
+  upperpred <- max(predict_summarized$pred_q_0.975)
+  upperdata <- max(gam_summarized$gam_q_0.95)
+
+
+  if(upperpred > (upperdata * 4)) {
+    set_upperlimit = TRUE
+  } else {set_upperlimit = FALSE}
+
+
+
   sp_plot_index <- ggplot2::ggplot() +
 
     # Vertical line showing the year goals were set
@@ -107,8 +120,8 @@ plot_trend <- function(raw_indices = NULL,
     #          label = "<- reference year", col = "black", alpha = 0.2,
     #          hjust=0, fontface = "bold", size = 2)+
 
-    ggplot2::geom_vline(xintercept = 2026, size=1, col = "black", alpha = 0.4, linetype="dotted")+
-    ggplot2::geom_vline(xintercept = 2046, size=1, col = "black", alpha = 0.4, linetype="dotted")+
+    ggplot2::geom_vline(xintercept = 2026, linewidth =1, col = "black", alpha = 0.4, linetype="dotted")+
+    ggplot2::geom_vline(xintercept = 2046, linewidth =1, col = "black", alpha = 0.4, linetype="dotted")+
 
     # gam smooth
     ggplot2::geom_ribbon(data = gam_summarized, aes(x = year, ymin = gam_q_0.025, ymax = gam_q_0.975), alpha = 0.4, fill = "gray50")+
@@ -121,6 +134,10 @@ plot_trend <- function(raw_indices = NULL,
     ggplot2::ylab("Annual Index of Abundance")+
     ggplot2::xlab("Year")+
     ggplot2::theme_bw()
+
+  if(set_upperlimit == TRUE) {
+    sp_plot_index <- sp_plot_index +
+      coord_cartesian(ylim=c(0, upperdata * 4))}
 
 
   if(!is.null(raw_indices)){
