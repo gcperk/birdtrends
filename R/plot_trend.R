@@ -137,7 +137,7 @@ plot_trend <- function(raw_indices = NULL,
 
   if(set_upperlimit == TRUE) {
     sp_plot_index <- sp_plot_index +
-      coord_cartesian(ylim=c(0, upperdata * 4))}
+      ggplot2::coord_cartesian(ylim=c(0, upperdata * 4))}
 
 
   if(!is.null(raw_indices)){
