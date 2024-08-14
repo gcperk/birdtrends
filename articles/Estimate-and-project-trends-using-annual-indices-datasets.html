@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Estimate and projecttrends over time • birdtrends</title>
+<title>Estimate and project trends over time • birdtrends</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Estimate and projecttrends over time">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Estimate and project trends over time">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -34,7 +34,7 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="../articles/Comparing-trends-over-time.html">Comparing-trends-over-time</a></li>
-    <li><a class="dropdown-item" href="../articles/Estimate-and-project-trends-using-annual-indices-datasets.html">Estimate and projecttrends over time</a></li>
+    <li><a class="dropdown-item" href="../articles/Estimate-and-project-trends-using-annual-indices-datasets.html">Estimate and project trends over time</a></li>
     <li><a class="dropdown-item" href="../articles/Estimate-and-project-trends-using-BBS-smooth-dataset.html">Estimate-and-project-trends-using-BBS-smooth-dataset</a></li>
     <li><a class="dropdown-item" href="../articles/Estimate-and-project-trends-using-posterior-distribution-draws.html">Estimate-and-project-trends-using-posterior-distribution-draws</a></li>
     <li><a class="dropdown-item" href="../articles/Getting_started.html">Getting_started</a></li>
@@ -59,7 +59,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
 
-      <h1>Estimate and projecttrends over time</h1>
+      <h1>Estimate and project trends over time</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/ninoxconsulting/birdtrends/blob/main/vignettes/Estimate-and-project-trends-using-annual-indices-datasets.Rmd" class="external-link"><code>vignettes/Estimate-and-project-trends-using-annual-indices-datasets.Rmd</code></a></small>
@@ -129,14 +129,14 @@ a known autocorrelation structure in the annual errors.</p>
 <span><span class="va">fitted_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fit_hgam.html">fit_hgam</a></span><span class="op">(</span><span class="va">indat1</span>, start_yr <span class="op">=</span> <span class="cn">NA</span>, end_yr <span class="op">=</span> <span class="cn">NA</span>, n_knots <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Running MCMC with 4 parallel chains...</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Chain 1 finished in 2.1 seconds.</span></span>
-<span><span class="co">#&gt; Chain 3 finished in 2.1 seconds.</span></span>
-<span><span class="co">#&gt; Chain 4 finished in 2.0 seconds.</span></span>
+<span><span class="co">#&gt; Chain 1 finished in 2.2 seconds.</span></span>
 <span><span class="co">#&gt; Chain 2 finished in 2.2 seconds.</span></span>
+<span><span class="co">#&gt; Chain 3 finished in 2.1 seconds.</span></span>
+<span><span class="co">#&gt; Chain 4 finished in 2.1 seconds.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; All 4 chains finished successfully.</span></span>
-<span><span class="co">#&gt; Mean chain execution time: 2.1 seconds.</span></span>
-<span><span class="co">#&gt; Total execution time: 2.4 seconds.</span></span>
+<span><span class="co">#&gt; Mean chain execution time: 2.2 seconds.</span></span>
+<span><span class="co">#&gt; Total execution time: 2.3 seconds.</span></span>
 <span></span>
 <span><span class="co"># output the same data in a long format for plotting purposes </span></span>
 <span><span class="va">fitted_data_wide</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fit_hgam.html">fit_hgam</a></span><span class="op">(</span><span class="va">indat1</span>, start_yr <span class="op">=</span> <span class="cn">NA</span>, end_yr <span class="op">=</span> <span class="cn">NA</span>, n_knots <span class="op">=</span> <span class="cn">NA</span>, longform <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
@@ -144,7 +144,7 @@ a known autocorrelation structure in the annual errors.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Chain 1 finished in 2.1 seconds.</span></span>
 <span><span class="co">#&gt; Chain 3 finished in 2.1 seconds.</span></span>
-<span><span class="co">#&gt; Chain 4 finished in 2.1 seconds.</span></span>
+<span><span class="co">#&gt; Chain 4 finished in 2.2 seconds.</span></span>
 <span><span class="co">#&gt; Chain 2 finished in 2.3 seconds.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; All 4 chains finished successfully.</span></span>
