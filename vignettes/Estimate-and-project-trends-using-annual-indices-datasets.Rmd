@@ -1,8 +1,8 @@
 ---
-title: "Estimate and projecttrends over time"
+title: "Estimate and project trends over time"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Estimate and projecttrends over time}
+  %\VignetteIndexEntry{Estimate and project trends over time}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
